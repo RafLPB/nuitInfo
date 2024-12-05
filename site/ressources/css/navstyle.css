@@ -27,6 +27,7 @@ html, body {
 }
 
 .silhouette {
+    width: 40vw;
     height: 100%; /* L'image prend toute la largeur */
     display: block;
 }
