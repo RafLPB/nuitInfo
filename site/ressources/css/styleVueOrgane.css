@@ -1,69 +1,237 @@
-:root {
-    --bg-color: #f0f4f8;
-    --text-color: #2c3e50;
-    --primary-color: #3498db;
-    --secondary-color: #2ecc71;
-    --accent-color: #e74c3c;
+/* Ocean-Themed Stylesheet for Heart Page */
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Quicksand', sans-serif;
+    background: linear-gradient(160deg, #0077be, #00293c);
+    color: white;
     line-height: 1.6;
-    color: var(--text-color);
-    background-color: var(--bg-color);
-    margin: 0;
-    padding: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
 }
 
 .container {
-    max-width: 800px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
-    background-color: white;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 10;
 }
 
 header {
-    background-color: var(--primary-color);
-    color: white;
     text-align: center;
-    padding: 20px;
-}
-
-h1 {
-    margin: 0;
-    font-size: 2.5em;
-}
-
-main {
-    padding: 20px;
-}
-
-.section-title {
-    color: var(--primary-color);
-    border-bottom: 2px solid var(--secondary-color);
-    padding-bottom: 10px;
+    padding: 20px 0;
+    background: rgba(0, 119, 190, 0.2);
     margin-bottom: 20px;
+    border-radius: 10px;
 }
 
-.metaphore, .consequences {
-    background-color: #f9f9f9;
-    border-left: 4px solid var(--accent-color);
-    padding: 15px;
-    margin-bottom: 20px;
-}
-
-.consequences .bon-fonctionnement,
-.consequences .mauvais-fonctionnement {
+h1, h2, h3, h4 {
+    color: #87CEFA;
     margin-bottom: 15px;
 }
 
-footer {
-    background-color: var(--text-color);
-    color: white;
-    text-align: center;
-    padding: 10px;
+.article {
+    display: flex;
+    gap: 30px;
+    background: rgba(0, 41, 60, 0.5);
+    padding: 30px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+}
+
+.metaphore, .bon-fonctionnement, .mauvais-fonctionnement {
+    background: rgba(173, 216, 230, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mascotte-container {
     position: relative;
-    bottom: 0;
-    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 250px;
+}
+
+.mascotte-container img {
+    max-width: 200px;
+    filter: drop-shadow(0 0 10px rgba(0, 119, 190, 0.5));
+}
+
+.mascotte-bubble {
+    position: absolute;
+    top: -30px;
+    background: rgba(0, 119, 190, 0.7);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.consequences {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.quiz-container {
+    background: rgba(0, 41, 60, 0.6);
+    border-radius: 15px;
+    padding: 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+.quiz-slide {
+    display: none;
+    text-align: center;
+}
+
+.quiz-slide.active {
+    display: block;
+}
+
+.quiz-question {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    color: #87CEFA;
+}
+
+.quiz-options {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.quiz-options button {
+    background: rgba(0, 119, 190, 0.7);
+    border: none;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.quiz-options button:hover {
+    background: rgba(0, 119, 190, 0.9);
+}
+
+.quiz-options button.correct {
+    background: #2ecc71;
+}
+
+.quiz-options button.wrong {
+    background: #e74c3c;
+}
+
+.quiz-controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.quiz-control-btn {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    border: none;
+    cursor: pointer;
+}
+
+.quiz-control-btn.active {
+    background: #87CEFA;
+}
+
+.bubble {
+    position: fixed;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    z-index: -1;
+    animation: float linear infinite;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0) scale(0.5);
+        opacity: 0.3;
+    }
+    50% {
+        transform: translateY(-600px) scale(1);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(-1200px) scale(1.5);
+        opacity: 0;
+    }
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background: rgba(0, 41, 60, 0.5);
+    margin-top: 30px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .article, .consequences {
+        flex-direction: column;
+    }
+
+    .quiz-options {
+        flex-direction: column;
+    }
+
+    .quiz-options button {
+        width: 100%;
+    }
+}
+
+.mascotte-container {
+    position: relative;
+    width: 200px;
+    transform: rotate(5deg);
+    transition: transform 0.3s ease;
+}
+
+.mascotte-container:hover {
+    transform: rotate(-5deg) scale(1.05);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}
+
+.mascotte-bubble {
+    position: absolute;
+    top: -30px;
+    right: -20px;
+    background-color: var(--secondary-color);
+    color: white;
+    border-radius: 20px;
+    padding: 10px 15px;
+    font-weight: bold;
+    font-size: 0.9em;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    animation: bounce 1.5s infinite alternate;
+}
+
+@keyframes bounce {
+    from { transform: translateY(0); }
+    to { transform: translateY(-10px); }
 }

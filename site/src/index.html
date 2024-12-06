@@ -2,42 +2,68 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page d'Accueil</title>
+    <title>AquaPulse - Voyage Intérieur</title>
     <link rel="stylesheet" href="../ressources/css/navstyle.css">
 </head>
-<body class="container">
-    <main>
-        <div>
-            <div class="content">
-                <img src="../ressources/img/bonhomme.png" alt="Silhouette d'un homme" class="silhouette">
-            </div>
-        </div>
-        <a type="btn" href="vueOrgane/coeur.html">Coeur</a>
-        <a type="btn" href="vueOrgane/poumons.html">Poumons</a>
-        <a type="btn" href="vueOrgane/estomac.html">Estomac</a>
-        <a type="btn" href="vueOrgane/appa-digestif.html">Appareil digestif</a>
-    </main>
-    <footer>
-        <div class="footer-info">
-            <ul>
-            <li>Nom Site</li>
-            <li>Email : contact@nomsite.com</li>
-            </ul>
-        </div>
+<body>
+<div class="ocean-container">
+    <div class="human-silhouette">
+        <img src="../ressources/img/bonhomme.png" alt="Silhouette humaine">
+    </div>
+    <a href="vueOrgane/coeur.html" class="organ-link">
+    <div class="organ" id="coeur">
+        <img src="../ressources/img/organes/coeur.png" alt="Coeur">
+        <p>Coeur</p>
+    </div>
+    </a>
+    <a href="vueOrgane/poumons.html" class="organ-link">
+    <div class="organ" id="poumons">
+        <img src="../ressources/img/organes/poumons.png" alt="Poumons">
+        <p>Poumons</p>
+    </div>
+    </a>
 
-        <div class="footer-nav">
-            <ul>
-                <li>Accueil</li>
-                <li>Crédits</li>
-                <li>Contact</li>
-            </ul>
-        </div>
+    <a href="vueOrgane/estomac.html" class="organ-link">
+    <div class="organ" id="estomac">
+        <img src="../ressources/img/organes/estomac.png" alt="Estomac">
+        <p>Estomac</p>
+    </div>
+    </a>
 
-        <div class="footer-copyright">
-            <p>&copy; 2024 nomsite. Tous droits réservés.</p>
-        </div>
-    </footer>
+    <a href="vueOrgane/reins.html" class="organ-link">
+    <div class="organ" id="reins">
+        <img src="../ressources/img/organes/reins.png" alt="Reins">
+        <p>Reins</p>
+    </div>
+    </a>
+</div>
 
+<div class="underwater-footer">
+    <div class="footer-links">
+        <a href="#">Accueil</a>
+        <a href="#">Crédits</a>
+        <a href="#">Contact</a>
+    </div>
+    <div style="margin-top: 10px; opacity: 0.6;">
+        © 2024 AquaPulse. Tous droits réservés.
+    </div>
+</div>
+
+<script>
+    function createBubbles() {
+        const container = document.body;
+        for (let i = 0; i < 50; i++) {
+            const bubble = document.createElement('div');
+            bubble.classList.add('bubble');
+            bubble.style.width = `${Math.random() * 20 + 5}px`;
+            bubble.style.height = bubble.style.width;
+            bubble.style.left = `${Math.random() * 100}%`;
+            bubble.style.animationDuration = `${Math.random() * 10 + 5}s`;
+            bubble.style.animationDelay = `${Math.random() * 5}s`;
+            container.appendChild(bubble);
+        }
+    }
+    createBubbles();
+</script>
 </body>
 </html>

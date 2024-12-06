@@ -1,10 +1,166 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poumons : Surface de la Mer et Échanges Gazeux</title>
+    <link rel="stylesheet" href="../../ressources/css/styleVueOrgane.css">
+    <script>
+
+        let currentSlide = 0;
+
+        function checkAnswer(questionNumber, selectedAnswer, buttonElement) {
+            const correctAnswers = {
+                '1': 'Surface de la mer',
+                '2': 'Acidification',
+                '3': 'Pollution océanique et maladies respiratoires'
+            };
+
+            if (selectedAnswer === correctAnswers[questionNumber]) {
+                buttonElement.classList.add('correct'); // Ajout de la classe 'correct'
+                setTimeout(() => {
+                    currentSlide++;
+                    showSlide(currentSlide);
+                }, 1000);
+            } else {
+                buttonElement.classList.add('wrong'); // Ajout de la classe 'wrong'
+            }
+        }
+
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.quiz-slide');
+            const controls = document.querySelectorAll('.quiz-control-btn');
+
+            if (n >= slides.length) {
+                console.log("Quiz terminé !");
+                return;
+            }
+
+            slides.forEach((slide, index) => {
+                slide.classList.toggle('active', index === n);
+            });
+            controls.forEach((control, index) => {
+                control.classList.toggle('active', index === n);
+            });
+        }
+
+        // Afficher la première question
+        showSlide(currentSlide);
+
+        const controls = document.querySelectorAll('.quiz-control-btn');
+        controls.forEach((control, index) => {
+            control.addEventListener('click', () => {
+                currentSlide = index;
+                showSlide(currentSlide);
+            });
+        });
+
+    </script>
 </head>
 <body>
+<header>
+    <h1>Poumons : Une Métaphore Marine</h1>
+</header>
 
+<div class="container">
+    <main>
+        <a type="button" href="../index.html"> <- Retour </a>
+
+        <h2 class="section-title">Poumons → Surface de la mer et échanges gazeux</h2>
+
+        <div class="article">
+        <div class="metaphore">
+            <h3>Métaphore</h3>
+            <p>Les poumons sont analogues à la surface de la mer, où se déroulent les échanges gazeux entre l'atmosphère et l'eau. Les poumons permettent l'échange d'oxygène et de dioxyde de carbone entre l'air et le sang, de la même manière que la mer absorbe et libère des gaz essentiels.</p>
+
+            <p>La mer joue un rôle crucial dans la gestion du CO₂ sur Terre. L'énergie solaire absorbée par l'océan favorise un cycle naturel : le CO₂ est utilisé par les planctons pour se développer. Les planctons végétaux, via la photosynthèse, consomment du CO₂ et nourrissent un grand nombre d’organismes marins. Lorsqu'ils meurent, leurs squelettes carbonatés tombent au fond de l’océan, favorisant la séquestration du carbone et la sédimentation.</p>
+
+            <p>Dans le sang, un excès de CO₂ provoque une acidification, entraînant des troubles métaboliques. De la même manière, l'acidification des océans perturbe la capacité de certains phytoplanctons à croître et à se renouveler. Cette perturbation affecte la chaîne alimentaire marine, diminuant les populations de poissons et d'autres espèces marines. Il est essentiel de rappeler que les ressources halieutiques représentent une source alimentaire majeure pour l'humanité.</p>
+        </div>
+
+        <div class="mascotte-container">
+            <div class="mascotte-bubble">Le savais-tu ?</div>
+            <img src="../../ressources/img/mascotteRequin1.png" alt="image mascotte">
+        </div>
+        </div>
+
+        <div class="consequences">
+            <div class="bon-fonctionnement">
+                <h4>Bon fonctionnement</h4>
+                <p>Une mer saine absorbe efficacement le CO₂ et régule l'oxygène, contribuant à la stabilité climatique. De même, des poumons en bonne santé permettent une respiration efficace, augmentant la capacité énergétique du corps et réduisant le stress.</p>
+                <br>
+                <div class="mascotte-container">
+                    <div class="mascotte-bubble">C'est SUPER ça !</div>
+                    <img src="../../ressources/img/mascotteRequin3.png" alt="image mascotte">
+                </div>
+            </div>
+
+            <div class="mauvais-fonctionnement">
+                <h4>Mauvais fonctionnement</h4>
+                <p>La pollution océanique réduit la capacité d'absorption des gaz, entraînant une acidification des eaux et la mort des micro-organismes essentiels, ce qui brise la chaîne alimentaire. Parallèlement, des poumons dysfonctionnels (asthme, BPCO) réduisent la capacité d'oxygénation, provoquant des troubles métaboliques.</p>
+                <br>
+                <div class="mascotte-container">
+                    <div class="mascotte-bubble">Oh non ça fait peur</div>
+                    <img src="../../ressources/img/mascotteRequin4.png" alt="image mascotte">
+                </div>
+            </div>
+        </div>
+
+        <div class="quiz-container">
+            <div class="quiz-slide active">
+                <div class="quiz-question">
+                    À quoi les poumons sont-ils comparés dans cette métaphore ?
+                </div>
+                <div class="quiz-options">
+                    <button onclick="checkAnswer('1', 'Surface de la mer', this)">Surface de la mer</button>
+                    <button onclick="checkAnswer('1', 'Profondeur des océans', this)">Profondeur des océans</button>
+                    <button onclick="checkAnswer('1', 'Plages', this)">Plages</button>
+                </div>
+                <div id="quiz-result1-" class="quiz-result"></div>
+            </div>
+
+            <div class="quiz-slide">
+                <div class="quiz-question">
+                    Quel problème l'excès de CO₂ peut-il causer dans le sang et les océans ?
+                </div>
+                <div class="quiz-options">
+                    <button onclick="checkAnswer('2', 'Amélioration des échanges gazeux', this)">Amélioration des échanges gazeux</button>
+                    <button onclick="checkAnswer('2', 'Acidification', this)">Acidification</button>
+                    <button onclick="checkAnswer('2', 'Augmentation de la photosynthèse', this)">Augmentation de la photosynthèse</button>
+                </div>
+                <div id="quiz-result-2" class="quiz-result"></div>
+            </div>
+
+            <div class="quiz-slide">
+                <div class="quiz-question">
+                    Quels facteurs affectent à la fois les océans et les poumons ?
+                </div>
+                <div class="quiz-options">
+                    <button onclick="checkAnswer('3', 'Pollution océanique et maladies respiratoires', this)">Pollution océanique et maladies respiratoires</button>
+                    <button onclick="checkAnswer('3', 'Clarté des eaux et performance sportive', this)">Clarté des eaux et performance sportive</button>
+                    <button onclick="checkAnswer('3', 'Augmentation des nutriments', this)">Augmentation des nutriments</button>
+                </div>
+                <div id="quiz-result-3" class="quiz-result"></div>
+            </div>
+
+            <div class="quiz-slide">
+                <img src="../../ressources/img/mascotteRequin2.png" alt="requin content">
+                <h1>C'est gagné !!!</h1>
+                <div id="quiz-result-4" class="quiz-result"></div>
+
+            </div>
+
+            <div class="quiz-controls">
+                <button class="quiz-control-btn active">1</button>
+                <button class="quiz-control-btn">2</button>
+                <button class="quiz-control-btn">3</button>
+            </div>
+        </div>
+    </main>
+</div>
+
+<footer>
+    <p>&copy; 2024 Métaphore Océanique et Physiologique</p>
+</footer>
 </body>
 </html>

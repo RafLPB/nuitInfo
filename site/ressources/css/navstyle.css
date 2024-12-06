@@ -1,71 +1,155 @@
-/* Réinitialisation de base */
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;600&display=swap');
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-html, body {
+body {
+    font-family: 'Quicksand', sans-serif;
+    background: linear-gradient(160deg, #0077be, #00293c);
+    color: white;
+    min-height: 100vh;
+    overflow: hidden;
+    perspective: 1000px;
+}
+
+.ocean-container {
+    position: relative;
     width: 100%;
-    height: 100%;
-    overflow: hidden; /* Empêche le défilement */
-    font-family: Arial, sans-serif;
-}
-
-.container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-}
-
-.content {
-    flex-grow: 1;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    background: radial-gradient(ellipse at center, rgba(0,119,190,0.2) 0%, rgba(0,41,60,0.6) 100%);
 }
 
-.silhouette {
-    width: 40vw;
-    height: 100%; /* L'image prend toute la largeur */
-    display: block;
-}
-
-footer {
-    width: 100%;
+.human-silhouette {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+    border-radius: 50%;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    padding: 2rem 0;
-    margin-top: auto;
-    border-top: 1px solid #ddd;
-    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+    justify-content: center;
+    align-items: center;
+    border: 3px solid rgba(173,216,230,0.3);
+    box-shadow: 0 0 50px rgba(0,119,190,0.5);
+    z-index: 10;
+    animation: breathe 4s infinite ease-in-out;
 }
 
-footer div{
-    padding: 0px 20px 0px 20px;
+.human-silhouette img {
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+    opacity: 0.8;
 }
-footer a {
+
+.organ {
+    position: absolute;
+    width: 100px;  /* Augmenté de 80px à 100px */
+    height: 100px; /* Augmenté de 80px à 100px */
+    background: rgba(173,216,230,0.2);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.5s ease;
+    cursor: pointer;
+    border: 2px solid rgba(255,255,255,0.2);
+    z-index: 5;  /* Ajout d'un z-index pour s'assurer de la visibilité */
+}
+
+.organ img {
+    width: 60px;  /* Légèrement augmenté */
+    height: 60px; /* Légèrement augmenté */
+    object-fit: contain;
+    opacity: 0.9;
+}
+
+.organ-link {
+    margin-top: 5px;
+    font-size: 12px;
     color: white;
     text-decoration: none;
-    transition: color 0.3s ease;
+    opacity: 0.7;
+    transition: opacity 0.3s;
 }
 
-footer a:hover {
-    text-decoration: none;
+.organ:hover {
+    transform: scale(1.2) rotateY(20deg);
+    background: rgba(173,216,230,0.4);
 }
 
-footer li {
-    list-style-type: none; /* Supprime les puces des éléments de liste */
-    margin-bottom: 5px;
+.organ:hover .organ-link {
+    opacity: 1;
 }
 
-.footer-copyright {
-    text-align: center;
+#coeur {
+    top: 20%;
+    left: 47.5%;
+}
+#poumons {
+    top: 43%;
+    right: 60%;
+}
+#estomac {
+    bottom: 20%;
+    left: 47.5%;
+}
+#reins {
+    top: 43%;
+    left: 60%;
+}
+
+.bubble {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    animation: float linear infinite;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0) scale(0.5);
+        opacity: 0.3;
+    }
+    50% {
+        transform: translateY(-600px) scale(1);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(-1200px) scale(1.5);
+        opacity: 0;
+    }
+}
+
+@keyframes breathe {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+}
+
+.underwater-footer {
+    position: fixed;
+    bottom: 0;
     width: 100%;
+    background: linear-gradient(to top, rgba(0,119,190,0.3), transparent);
+    padding: 20px;
+    text-align: center;
+    z-index: 20;
 }
 
-.footer-info {
-    margin-bottom: 40px;
+.footer-links a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+}
+
+.footer-links a:hover {
+    opacity: 1;
 }

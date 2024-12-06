@@ -2,9 +2,170 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Coeur</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cœur : Courants Marins et Circulation</title>
+    <link rel="stylesheet" href="../../ressources/css/styleVueOrgane.css">
+    <script>
+        let currentSlide = 0;
+
+        function checkAnswer(questionNumber, selectedAnswer, buttonElement) {
+            const correctAnswers = {
+                '1': 'Gulf Stream',
+                '2': 'Altération de la circulation',
+                '3': 'Risque accru de maladies cardiovasculaires'
+            };
+
+            // Vérification de la réponse et changement de la couleur du bouton
+            if (selectedAnswer === correctAnswers[questionNumber]) {
+                buttonElement.classList.add('correct'); // Ajout de la classe 'correct'
+                setTimeout(() => {
+                    currentSlide++;
+                    showSlide(currentSlide);
+                }, 1000);
+            } else {
+                buttonElement.classList.add('wrong'); // Ajout de la classe 'wrong'
+            }
+        }
+
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.quiz-slide');
+            const controls = document.querySelectorAll('.quiz-control-btn');
+
+            if (n >= slides.length) {
+                // Quiz terminé
+                console.log("Quiz terminé !");
+                return;
+            }
+
+            slides.forEach((slide, index) => {
+                slide.classList.toggle('active', index === n);
+            });
+            controls.forEach((control, index) => {
+                control.classList.toggle('active', index === n);
+            });
+        }
+
+        // Afficher la première question
+        showSlide(currentSlide);
+
+        // Ajouter les écouteurs d'événements pour les contrôles du carrousel
+        const controls = document.querySelectorAll('.quiz-control-btn');
+        controls.forEach((control, index) => {
+            control.addEventListener('click', () => {
+                currentSlide = index;
+                showSlide(currentSlide);
+            });
+        });
+
+    </script>
 </head>
 <body>
+<header>
+    <h1>Cœur : Une Métaphore Marine</h1>
+</header>
+    <main class="container">
+        <a href="../index.html"> <- Retour </a>
 
+        <h2 class="section-title">Cœur → Courants marins</h2>
+
+        <div class="article">
+            <div class="metaphore">
+                <h3>Métaphore</h3>
+                <p>Le cœur propulse le sang chargé d'oxygène et de nutriments dans tout l'organisme, assurant ainsi l'alimentation en oxygène et en énergie du corps entier. Il est comparable aux courants marins qui régulent la circulation de l'eau à travers les océans, transportant les nutriments, l'oxygène et la chaleur nécessaires à la vie marine.</p>
+
+                <p>L'ensemble des courants de surface et de profondeur forment une grande boucle appelée la circulation thermohaline. Également connue sous le nom de circulation méridienne de retournement Atlantique, cette boucle est essentielle car elle répartit l'énergie thermique provenant du soleil, ce qui prévient de trop grandes différences de température entre l'équateur et les pôles.</p>
+
+                <p>Un exemple notable est celui du Gulf Stream, l'un des courants les plus puissants de la planète :</p>
+                <ul>
+                    <li>Il transporte les eaux chaudes, accumulées à l'équateur, depuis les Caraïbes vers l'Europe.</li>
+                    <li>Il transporte les eaux froides du Canada et de l'Europe vers les régions plus chaudes.</li>
+                </ul>
+
+                <p>Ce mécanisme explique pourquoi l'Europe du Nord bénéficie d'un climat plus doux que les régions d'Amérique du Nord situées à la même latitude.</p>
+
+                <p>Cependant, le réchauffement climatique perturbe cette dynamique. La fonte rapide des glaces entraîne une accumulation d'eaux froides et peu salées (moins denses) dans le Gulf Stream. Cette redistribution altère la circulation thermohaline, oblige les eaux chaudes à s'enfoncer plus en profondeur et à reculer vers le sud, ce qui pourrait accentuer les risques d'événements météorologiques extrêmes.</p>
+            </div>
+            <div class="mascotte-container">
+                <div class="mascotte-bubble">Le savais-tu ?</div>
+                <img src="../../ressources/img/mascotteRequin1.png" alt="image mascotte">
+            </div>
+        </div>
+
+
+        <div class="consequences">
+
+            <div class="bon-fonctionnement">
+                <h4>Bon fonctionnement</h4>
+                <p>Des courants marins stables maintiennent un équilibre thermique et écologique. L'ensemble de ces courants, chauds et froids, répartit la chaleur entre les pôles et l'équateur, régulant ainsi les climats. De manière comparable, un cœur sain assure une bonne oxygénation et une alimentation efficace des cellules, garantissant une santé globale et une énergie suffisante.</p>
+                <br>
+                <div class="mascotte-container">
+                    <div class="mascotte-bubble">C'est SUPER ça !</div>
+                    <img src="../../ressources/img/mascotteRequin3.png" alt="image mascotte">
+                </div>
+            </div>
+            <div class="mauvais-fonctionnement">
+                <h4>Mauvais fonctionnement</h4>
+                <p>Des courants marins perturbés peuvent provoquer des anomalies climatiques, comme des ouragans ou la stagnation des eaux. De même, un cœur défaillant peut entraîner des maladies cardiovasculaires, de l'hypertension ou des insuffisances cardiaques, impactant la santé globale de l'organisme.</p>
+                <br>
+                <div class="mascotte-container">
+                    <div class="mascotte-bubble">Oh non ça fait peur</div>
+                    <img src="../../ressources/img/mascotteRequin4.png" alt="image mascotte">
+                </div>
+            </div>
+        </div>
+
+        <div class="quiz-container">
+            <div class="quiz-slide active">
+                <div class="quiz-question">
+                    Quel est l'un des courants les plus puissants de la planète ?
+                </div>
+                <div class="quiz-options">
+                    <button onclick="checkAnswer('1', 'Gulf Stream',this)">Gulf Stream</button>
+                    <button onclick="checkAnswer('1', 'Courant de Humboldt',this)">Courant de Humboldt</button>
+                    <button onclick="checkAnswer('1', 'Courant des Canaries',this)">Courant des Canaries</button>
+                </div>
+                <div id="quiz-result-1" class="quiz-result"></div>
+            </div>
+
+            <div class="quiz-slide">
+                <div class="quiz-question">
+                    Quel est l'impact du réchauffement climatique sur la circulation thermohaline ?
+                </div>
+                <div class="quiz-options">
+                    <button onclick="checkAnswer('2', 'Aucun impact',this)">Aucun impact</button>
+                    <button onclick="checkAnswer('2', 'Renforcement de la circulation',this)">Renforcement de la circulation</button>
+                    <button onclick="checkAnswer('2', 'Altération de la circulation',this)">Altération de la circulation</button>
+                </div>
+                <div id="quiz-result-2" class="quiz-result"></div>
+            </div>
+
+            <div class="quiz-slide">
+                <div class="quiz-question">
+                    Quelle est la principale différence entre le fonctionnement d'un cœur sain et un cœur défaillant ?
+                </div>
+                <div class="quiz-options">
+                    <button onclick="checkAnswer('3', 'Aucune différence',this)">Aucune différence</button>
+                    <button onclick="checkAnswer('3', 'Meilleure oxygénation des cellules',this)">Meilleure oxygénation des cellules</button>
+                    <button onclick="checkAnswer('3', 'Risque accru de maladies cardiovasculaires',this)">Risque accru de maladies cardiovasculaires</button>
+                </div>
+                <div id="quiz-result-3" class="quiz-result"></div>
+            </div>
+
+            <div class="quiz-slide">
+                <img src="../../ressources/img/mascotteRequin2.png" alt="requin content">
+                <h1>C'est gagné !!!</h1>
+                <div id="quiz-result-4" class="quiz-result"></div>
+            </div>
+
+            <div class="quiz-controls">
+                <button class="quiz-control-btn active">1</button>
+                <button class="quiz-control-btn">2</button>
+                <button class="quiz-control-btn">3</button>
+            </div>
+        </div>
+    </main>
+<footer>
+    <p>&copy; 2024 Métaphore Océanique et Physiologique</p>
+</footer>
 </body>
 </html>

@@ -1,10 +1,166 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Estomac</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estomac : Vagues et Brassage des Fonds Marins</title>
+    <link rel="stylesheet" href="../../ressources/css/styleVueOrgane.css">
+    <script>
+        let currentSlide = 0;
+
+        function checkAnswer(questionNumber, selectedAnswer, buttonElement) {
+            const correctAnswers = {
+                '1': 'Brassage des fonds marins',
+                '2': 'Appauvrissement des eaux',
+                '3': 'Indigestion et douleurs'
+            };
+
+            // Vérification de la réponse et changement de la couleur du bouton
+            if (selectedAnswer === correctAnswers[questionNumber]) {
+                buttonElement.classList.add('correct'); // Ajout de la classe 'correct'
+                setTimeout(() => {
+                    currentSlide++;
+                    showSlide(currentSlide);
+                }, 1000);
+            } else {
+                buttonElement.classList.add('wrong'); // Ajout de la classe 'wrong'
+            }
+        }
+
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.quiz-slide');
+            const controls = document.querySelectorAll('.quiz-control-btn');
+
+            if (n >= slides.length) {
+                // Quiz terminé
+                console.log("Quiz terminé !");
+                return;
+            }
+
+            slides.forEach((slide, index) => {
+                slide.classList.toggle('active', index === n);
+            });
+            controls.forEach((control, index) => {
+                control.classList.toggle('active', index === n);
+            });
+        }
+
+        // Afficher la première question
+        showSlide(currentSlide);
+
+        // Ajouter les écouteurs d'événements pour les contrôles du carrousel
+        const controls = document.querySelectorAll('.quiz-control-btn');
+        controls.forEach((control, index) => {
+            control.addEventListener('click', () => {
+                currentSlide = index;
+                showSlide(currentSlide);
+            });
+        });
+    </script>
 </head>
 <body>
+<header>
+    <h1>Estomac : Une Métaphore Marine</h1>
+</header>
 
+<div class="container">
+    <main>
+        <a type="button" href="../index.html"> <- Retour </a>
+
+        <h2 class="section-title">Estomac → Vagues et Brassage des Fonds Marins</h2>
+
+        <div class="article">
+        <div class="metaphore">
+            <h3>Métaphore</h3>
+            <p>L'estomac peut être comparé aux vagues et au brassage des fonds marins.</p>
+            <p><strong>Estomac :</strong> Il mélange et broie les aliments pour les réduire en une pâte, facilitant leur digestion grâce aux enzymes et acides gastriques.</p>
+            <p><strong>Vagues :</strong> Elles agitent les sédiments et les nutriments sur le fond marin, les maintenant en suspension pour nourrir la vie marine.</p>
+            <p>Tout comme l'estomac brasse les aliments, les vagues jouent un rôle essentiel dans l'écosystème marin, en redistribuant les éléments nutritifs et en favorisant la productivité des océans.</p>
+        </div>
+        <div class="mascotte-container">
+            <div class="mascotte-bubble">Le savais-tu ?</div>
+            <img src="../../ressources/img/mascotteRequin1.png" alt="image mascotte">
+        </div>
+        </div>
+
+        <div class="consequences">
+            <div class="bon-fonctionnement">
+                <h4>Bon fonctionnement</h4>
+                <p><strong>Estomac :</strong> Un estomac fonctionnant correctement permet une digestion efficace et l'absorption des nutriments nécessaires pour fournir de l'énergie au corps.</p>
+                <p><strong>Vagues :</strong> Le brassage régulier garantit un écosystème marin équilibré, soutenant la biodiversité et la circulation des nutriments.</p>
+                <br>
+                <div class="mascotte-container">
+                    <div class="mascotte-bubble">C'est SUPER ça !</div>
+                    <img src="../../ressources/img/mascotteRequin3.png" alt="image mascotte">
+                </div>
+            </div>
+
+            <div class="mauvais-fonctionnement">
+                <h4>Mauvais fonctionnement</h4>
+                <p><strong>Estomac :</strong> Un mauvais fonctionnement peut entraîner des problèmes comme l'indigestion, les ballonnements ou des douleurs abdominales.</p>
+                <p><strong>Vagues :</strong> Une perturbation, comme un manque de vagues, peut provoquer la stagnation des nutriments, entraînant un appauvrissement de la biodiversité marine.</p>
+                <br>
+                <div class="mascotte-container">
+                    <div class="mascotte-bubble">Oh non ça fait peur</div>
+                    <img src="../../ressources/img/mascotteRequin4.png" alt="image mascotte">
+                </div>
+            </div>
+        </div>
+
+        <div class="quiz-container">
+            <div class="quiz-slide active">
+                <div class="quiz-question">
+                    À quoi l'estomac peut-il être comparé dans l'océan ?
+                </div>
+                <div class="quiz-options">
+                    <button onclick="checkAnswer('1', 'Brassage des fonds marins', this)">Brassage des fonds marins</button>
+                    <button onclick="checkAnswer('1', 'Courants marins', this)">Courants marins</button>
+                    <button onclick="checkAnswer('1', 'Récifs coralliens', this)">Récifs coralliens</button>
+                </div>
+                <div id="quiz-result-1" class="quiz-result"></div>
+            </div>
+
+            <div class="quiz-slide">
+                <div class="quiz-question">
+                    Quel est l'impact d'une perturbation des vagues ?
+                </div>
+                <div class="quiz-options">
+                    <button onclick="checkAnswer('2', 'Aucun impact', this)">Aucun impact</button>
+                    <button onclick="checkAnswer('2', 'Appauvrissement des eaux', this)">Appauvrissement des eaux</button>
+                    <button onclick="checkAnswer('2', 'Augmentation des nutriments', this)">Augmentation des nutriments</button>
+                </div>
+                <div id="quiz-result-2" class="quiz-result"></div>
+            </div>
+
+            <div class="quiz-slide">
+                <div class="quiz-question">
+                    Quelles sont les conséquences d'un estomac défaillant ?
+                </div>
+                <div class="quiz-options">
+                    <button onclick="checkAnswer('3', 'Amélioration de la digestion', this)">Amélioration de la digestion</button>
+                    <button onclick="checkAnswer('3', 'Indigestion et douleurs', this)">Indigestion et douleurs</button>
+                    <button onclick="checkAnswer('3', 'Aucun effet', this)">Aucun effet</button>
+                </div>
+                <div id="quiz-result-3" class="quiz-result"></div>
+            </div>
+
+            <div class="quiz-slide">
+                <img src="../../ressources/img/mascotteRequin2.png" alt="requin content">
+                <h1>C'est gagné !!!</h1>
+                <div id="quiz-result-4" class="quiz-result"></div>
+            </div>
+
+            <div class="quiz-controls">
+                <button class="quiz-control-btn active">1</button>
+                <button class="quiz-control-btn">2</button>
+                <button class="quiz-control-btn">3</button>
+            </div>
+        </div>
+    </main>
+</div>
+
+<footer>
+    <p>&copy; 2024 Métaphore Océanique et Physiologique</p>
+</footer>
 </body>
 </html>
