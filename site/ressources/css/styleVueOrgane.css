@@ -229,9 +229,48 @@ img {
     font-size: 0.9em;
     box-shadow: 0 4px 6px rgba(0,0,0,0.2);
     animation: bounce 1.5s infinite alternate;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 @keyframes bounce {
     from { transform: translateY(0); }
     to { transform: translateY(-10px); }
+}
+
+.mascotte-bubble .qr-code {
+    max-width: 80px;
+    margin-top: 10px;
+    opacity: 0.9;
+    border-radius: 10px;
+}
+
+.mascotte-container.hover-qr {
+    position: relative;
+}
+
+.mascotte-container.hover-qr .mascotte-image {
+    transition: opacity 0.3s ease;
+}
+
+.mascotte-container.hover-qr .qr-code-hover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.mascotte-container.hover-qr:hover .mascotte-image {
+    opacity: 0;
+}
+
+.mascotte-container.hover-qr:hover .qr-code-hover {
+    opacity: 1;
 }

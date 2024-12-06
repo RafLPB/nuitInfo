@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Changement Climatique : Une Menace Mondiale</title>
+    <link rel="stylesheet" href="../../ressources/css/styleVueOrgane.css">
+    <script>
+        let currentSlide = 0;
+
+        function checkAnswer(questionNumber, selectedAnswer, buttonElement) {
+            const correctAnswers = {
+                '1': 'Émissions de gaz à effet de serre',
+                '2': 'Fonte des glaciers',
+                '3': 'Élévation du niveau des océans'
+            };
+
+            if (selectedAnswer === correctAnswers[questionNumber]) {
+                buttonElement.classList.add('correct');
+                setTimeout(() => {
+                    currentSlide++;
+                    showSlide(currentSlide);
+                }, 1000);
+            } else {
+                buttonElement.classList.add('wrong');
+            }
+        }
+
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.quiz-slide');
+            const controls = document.querySelectorAll('.quiz-control-btn');
+
+            if (n >= slides.length) {
+                console.log("Quiz terminé !");
+                return;
+            }
+
+            slides.forEach((slide, index) => {
+                slide.classList.toggle('active', index === n);
+            });
+            controls.forEach((control, index) => {
+                control.classList.toggle('active', index === n);
+            });
+        }
+
+        showSlide(currentSlide);
+
+        const controls = document.querySelectorAll('.quiz-control-btn');
+        controls.forEach((control, index) => {
+            control.addEventListener('click', () => {
+                currentSlide = index;
+                showSlide(currentSlide);
+            });
+        });
+
+    </script>
+</head>
+<body>
+<header>
+    <h1>Le Changement Climatique : Une Menace Mondiale</h1>
+</header>
+
+<div class="container">
+    <main>
+        <a type="button" href="../vueOrgane/poumons.html"> <- Retour </a>
+
+        <h2 class="section-title">Le Changement Climatique et ses Impacts Globaux</h2>
+
+        <div class="article">
+            <div class="metaphore">
+                <h3>Introduction</h3>
+                <p>Le changement climatique est l'un des plus grands défis auxquels l'humanité est confrontée aujourd'hui. Il désigne la variation à long terme des températures et des conditions météorologiques à l'échelle mondiale, principalement causée par les émissions de gaz à effet de serre dues aux activités humaines. Ce phénomène entraîne des bouleversements écologiques et sociaux majeurs, affectant la faune, la flore, les sociétés humaines et les écosystèmes.</p>
+
+                <p>Les principales causes du changement climatique sont les émissions massives de dioxyde de carbone (CO₂), de méthane (CH₄) et d'autres gaz à effet de serre. Ces gaz piègent la chaleur dans l'atmosphère, provoquant un réchauffement global, ce qui a des conséquences dramatiques sur la planète, comme la fonte des glaciers, l'élévation du niveau des océans, et des phénomènes climatiques extrêmes.</p>
+
+                <p>Les scientifiques avertissent que si des actions concrètes ne sont pas prises rapidement pour réduire les émissions de gaz à effet de serre, les impacts du changement climatique continueront de se faire sentir, et de nombreuses régions du monde pourraient devenir inhabitables à cause des conditions extrêmes de chaleur, de sécheresse ou d'inondations.</p>
+            </div>
+
+            <div class="mascotte-container hover-qr">
+                <div class="mascotte-container">
+                    <div class="mascotte-bubble">Le savais-tu ?</div>
+                    <img src="../../ressources/img/mascotteRequin1.png" alt="image mascotte">
+                </div>
+            </div>
+        </div>
+
+        <div class="consequences">
+            <div class="bon-fonctionnement">
+                <h4>Un Environnement Stabilité</h4>
+                <p>Un climat stable permet de maintenir des écosystèmes équilibrés, favorisant la biodiversité et les conditions de vie des êtres humains. Les zones tempérées bénéficient de saisons régulières, et les océans jouent un rôle crucial dans la régulation du climat en absorbant le CO₂ et en distribuant la chaleur de manière homogène à l'échelle mondiale.</p>
+                <br>
+                <div class="mascotte-container">
+                    <div class="mascotte-bubble">C'est un environnement parfait !</div>
+                    <img src="../../ressources/img/mascotteRequin3.png" alt="image mascotte">
+                </div>
+            </div>
+
+            <div class="mauvais-fonctionnement">
+                <h4>Les Conséquences du Changement Climatique</h4>
+                <p>Le réchauffement climatique a des effets dévastateurs : la fonte des glaciers, l'élévation du niveau des océans, des vagues de chaleur intenses, des sécheresses prolongées, des inondations, et la perturbation des cycles naturels. Ces changements affectent non seulement les espèces animales et végétales, mais aussi les humains, en perturbant l'approvisionnement en nourriture, l'accès à l'eau, et en augmentant les risques sanitaires.</p>
+                <br>
+                <div class="mascotte-container">
+                    <div class="mascotte-bubble">Cela devient inquiétant...</div>
+                    <img src="../../ressources/img/mascotteRequin4.png" alt="image mascotte">
+                </div>
+            </div>
+        </div>
+
+        <div class="quiz-container">
+            <div class="quiz-slide active">
+                <div class="quiz-question">
+                    Quelle est la principale cause du changement climatique ?
+                </div>
+                <div class="quiz-options">
+                    <button onclick="checkAnswer('1', 'Émissions de gaz à effet de serre', this)">Émissions de gaz à effet de serre</button>
+                    <button onclick="checkAnswer('1', 'Augmentation des ressources naturelles', this)">Augmentation des ressources naturelles</button>
+                    <button onclick="checkAnswer('1', 'Changements dans l’agriculture', this)">Changements dans l’agriculture</button>
+                </div>
+                <div id="quiz-result1-" class="quiz-result"></div>
+            </div>
+
+            <div class="quiz-slide">
+                <div class="quiz-question">
+                    Quel phénomène est provoqué par la montée des températures ?
+                </div>
+                <div class="quiz-options">
+                    <button onclick="checkAnswer('2', 'Fonte des glaciers', this)">Fonte des glaciers</button>
+                    <button onclick="checkAnswer('2', 'Augmentation des précipitations', this)">Augmentation des précipitations</button>
+                    <button onclick="checkAnswer('2', 'Baisse du niveau des océans', this)">Baisse du niveau des océans</button>
+                </div>
+                <div id="quiz-result-2" class="quiz-result"></div>
+            </div>
+
+            <div class="quiz-slide">
+                <div class="quiz-question">
+                    Quel impact peut avoir l’élévation du niveau des océans ?
+                </div>
+                <div class="quiz-options">
+                    <button onclick="checkAnswer('3', 'Inondations des zones côtières', this)">Inondations des zones côtières</button>
+                    <button onclick="checkAnswer('3', 'Stabilité des habitats marins', this)">Stabilité des habitats marins</button>
+                    <button onclick="checkAnswer('3', 'Réduction de la salinité de l’eau', this)">Réduction de la salinité de l’eau</button>
+                </div>
+                <div id="quiz-result-3" class="quiz-result"></div>
+            </div>
+
+            <div class="quiz-slide">
+                <img src="../../ressources/img/mascotteRequin2.png" alt="requin content">
+                <h1>C'est gagné !!!</h1>
+                <div id="quiz-result-4" class="quiz-result"></div>
+
+            </div>
+
+            <div class="quiz-controls">
+                <button class="quiz-control-btn active">1</button>
+                <button class="quiz-control-btn">2</button>
+                <button class="quiz-control-btn">3</button>
+            </div>
+        </div>
+    </main>
+</div>
+
+<footer>
+    <p>&copy; 2024 Changement Climatique et ses Conséquences</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pêche Intensive : Une Menace pour les Océans</title>
+    <link rel="stylesheet" href="../../ressources/css/styleVueOrgane.css">
+    <script>
+        let currentSlide = 0;
+
+        function checkAnswer(questionNumber, selectedAnswer, buttonElement) {
+            const correctAnswers = {
+                '1': 'Réduction des stocks de poissons',
+                '2': 'Destruction des habitats marins',
+                '3': 'Disparition d’espèces marines'
+            };
+
+            if (selectedAnswer === correctAnswers[questionNumber]) {
+                buttonElement.classList.add('correct');
+                setTimeout(() => {
+                    currentSlide++;
+                    showSlide(currentSlide);
+                }, 1000);
+            } else {
+                buttonElement.classList.add('wrong');
+            }
+        }
+
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.quiz-slide');
+            const controls = document.querySelectorAll('.quiz-control-btn');
+
+            if (n >= slides.length) {
+                console.log("Quiz terminé !");
+                return;
+            }
+
+            slides.forEach((slide, index) => {
+                slide.classList.toggle('active', index === n);
+            });
+            controls.forEach((control, index) => {
+                control.classList.toggle('active', index === n);
+            });
+        }
+
+        showSlide(currentSlide);
+
+        const controls = document.querySelectorAll('.quiz-control-btn');
+        controls.forEach((control, index) => {
+            control.addEventListener('click', () => {
+                currentSlide = index;
+                showSlide(currentSlide);
+            });
+        });
+
+    </script>
+</head>
+<body>
+<header>
+    <h1>Pêche Intensive : Une Menace pour les Océans</h1>
+</header>
+
+<div class="container">
+    <main>
+        <a type="button" href="../vueOrgane/estomac.html"> <- Retour </a>
+
+        <h2 class="section-title">Pêche Intensive → Une Pratique Dévastatrice</h2>
+
+        <div class="article">
+            <div class="metaphore">
+                <h3>Introduction</h3>
+                <p>La pêche intensive, une activité pratiquée à grande échelle dans les océans, représente aujourd'hui l'une des menaces les plus graves pour les écosystèmes marins. Cette pratique, souvent illégale et non durable, entraîne une surpêche des ressources marines, menaçant ainsi la biodiversité et l'équilibre des océans.</p>
+
+                <p>La pêche industrielle utilise des méthodes destructrices comme les chaluts de fond, qui ravagent les fonds marins, détruisant les habitats naturels et menaçant de nombreuses espèces marines. Les conséquences sont dramatiques : épuisement des stocks de poissons, extinction de certaines espèces et perturbation des chaînes alimentaires marines.</p>
+
+                <p>Pour préserver la vie marine et protéger l'avenir des océans, il est urgent de réduire la pêche intensive et de favoriser des pratiques plus durables et respectueuses des écosystèmes.</p>
+            </div>
+
+            <div class="mascotte-container hover-qr">
+                <div class="mascotte-container">
+                    <div class="mascotte-bubble">Le savais-tu ?</div>
+                    <img src="../../ressources/img/mascotteRequin1.png" alt="image mascotte">
+                </div>
+            </div>
+        </div>
+
+        <div class="consequences">
+            <div class="bon-fonctionnement">
+                <h4>Équilibre Marin</h4>
+                <p>Une pêche durable, pratiquée de manière responsable, contribue à maintenir les stocks de poissons et protège les écosystèmes marins. De cette manière, l'équilibre des océans est préservé, et les espèces marines peuvent se renouveler naturellement, assurant ainsi la biodiversité marine et la santé des océans pour les générations futures.</p>
+                <br>
+                <div class="mascotte-container">
+                    <div class="mascotte-bubble">Une mer saine, c'est essentiel !</div>
+                    <img src="../../ressources/img/mascotteRequin3.png" alt="image mascotte">
+                </div>
+            </div>
+
+            <div class="mauvais-fonctionnement">
+                <h4>Impact de la Pêche Intensive</h4>
+                <p>La pêche intensive entraîne une destruction massive des habitats marins. L'utilisation de techniques comme le chalutage de fond dévaste les fonds marins et détruit les récifs coralliens, essentiels pour la survie de nombreuses espèces. La surpêche réduit considérablement les populations de poissons, menaçant la sécurité alimentaire mondiale et perturbant les écosystèmes marins.</p>
+                <br>
+                <div class="mascotte-container">
+                    <div class="mascotte-bubble">C'est catastrophique...</div>
+                    <img src="../../ressources/img/mascotteRequin4.png" alt="image mascotte">
+                </div>
+            </div>
+        </div>
+
+        <div class="quiz-container">
+            <div class="quiz-slide active">
+                <div class="quiz-question">
+                    Quelle est la conséquence directe de la pêche intensive sur les océans ?
+                </div>
+                <div class="quiz-options">
+                    <button onclick="checkAnswer('1', 'Réduction des stocks de poissons', this)">Réduction des stocks de poissons</button>
+                    <button onclick="checkAnswer('1', 'Augmentation de la biodiversité', this)">Augmentation de la biodiversité</button>
+                    <button onclick="checkAnswer('1', 'Préservation des récifs coralliens', this)">Préservation des récifs coralliens</button>
+                </div>
+                <div id="quiz-result1-" class="quiz-result"></div>
+            </div>
+
+            <div class="quiz-slide">
+                <div class="quiz-question">
+                    Quel impact la pêche intensive a-t-elle sur les habitats marins ?
+                </div>
+                <div class="quiz-options">
+                    <button onclick="checkAnswer('2', 'Destruction des habitats marins', this)">Destruction des habitats marins</button>
+                    <button onclick="checkAnswer('2', 'Restauration des récifs', this)">Restauration des récifs</button>
+                    <button onclick="checkAnswer('2', 'Protéger les zones marines', this)">Protéger les zones marines</button>
+                </div>
+                <div id="quiz-result-2" class="quiz-result"></div>
+            </div>
+
+            <div class="quiz-slide">
+                <div class="quiz-question">
+                    Quelle conséquence grave de la pêche intensive touche les espèces marines ?
+                </div>
+                <div class="quiz-options">
+                    <button onclick="checkAnswer('3', 'Disparition d’espèces marines', this)">Disparition d’espèces marines</button>
+                    <button onclick="checkAnswer('3', 'Croissance des populations marines', this)">Croissance des populations marines</button>
+                    <button onclick="checkAnswer('3', 'Augmentation des récifs coralliens', this)">Augmentation des récifs coralliens</button>
+                </div>
+                <div id="quiz-result-3" class="quiz-result"></div>
+            </div>
+
+            <div class="quiz-slide">
+                <img src="../../ressources/img/mascotteRequin2.png" alt="requin content">
+                <h1>C'est gagné !!!</h1>
+                <div id="quiz-result-4" class="quiz-result"></div>
+
+            </div>
+
+            <div class="quiz-controls">
+                <button class="quiz-control-btn active">1</button>
+                <button class="quiz-control-btn">2</button>
+                <button class="quiz-control-btn">3</button>
+            </div>
+        </div>
+    </main>
+</div>
+
+<footer>
+    <p>&copy; 2024 Sauvez les Océans - Stop à la Pêche Intensive</p>
+</footer>
+</body>
+</html>
