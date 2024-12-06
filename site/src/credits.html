@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Race for Water Project Contributors</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <style>
+        .dark-mode {
+            background-color: #1a202c;
+            color: #e2e8f0;
+        }
+        .dark-mode .bg-white {
+            background-color: #2d3748;
+            color: #e2e8f0;
+        }
+        .contributor-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .contributor-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-blue-50 transition-colors duration-300 p-4 md:p-8">
+<div class="container mx-auto max-w-4xl">
+    <header class="text-center mb-8 relative">
+        <h1 class="text-4xl font-bold text-blue-800 mb-4">
+            Race for Water Project Contributors
+        </h1>
+        <p class="text-gray-600 max-w-2xl mx-auto">
+            Collaborative effort to create an interactive ocean-human body metaphor application
+        </p>
+
+        <button id="theme-toggle" class="absolute top-4 right-4 bg-gray-200 rounded-full p-2 hover:bg-gray-300 transition-colors duration-300">
+            <i id="theme-icon" data-feather="moon" class="text-blue-600"></i>
+        </button>
+    </header>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4" id="contributors-container">
+        <!-- Contributor cards will be dynamically added here -->
+    </div>
+
+    <div class="mt-8 text-center">
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-2xl font-semibold text-blue-700 mb-4">
+                Project Context
+            </h2>
+            <p class="text-gray-600">
+                This project was developed for the Nuit de l'Info 2024, focusing on creating
+                an educational application that explores the parallels between the human body
+                and the ocean ecosystem.
+            </p>
+            <div class="flex justify-center items-center mt-4">
+                <i data-feather="wave" class="text-blue-500 mr-2"></i>
+                <span class="text-gray-700">
+                        Protecting Our Oceans, Understanding Our World
+                    </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Contributors Data
+    const contributors = [
+        {
+            name: "Alice Dupont",
+            role: "Lead Developer",
+            github: "alice-dupont",
+            avatar: "https://via.placeholder.com/100",
+            contributions: [
+                "Interactive Ocean Anatomy Mapping",
+                "Frontend Architecture",
+                "Podcast Integration"
+            ]
+        },
+        {
+            name: "Bob Martin",
+            role: "UX Designer",
+            github: "bob-martin",
+            avatar: "https://via.placeholder.com/100",
+            contributions: [
+                "User Interface Design",
+                "Mobile Responsiveness",
+                "Interaction Flows"
+            ]
+        },
+        {
+            name: "Claire Océane",
+            role: "Data Visualization Specialist",
+            github: "claire-oceane",
+            avatar: "https://via.placeholder.com/100",
+            contributions: [
+                "Ocean-Body Parallels Visualization",
+                "Interactive Infographics",
+                "Climate Data Integration"
+            ]
+        }
+    ];
+
+    // Render Contributors
+    const contributorsContainer = document.getElementById('contributors-container');
+    contributors.forEach(contributor => {
+        const contributorCard = document.createElement('div');
+        contributorCard.className = 'bg-white rounded-lg shadow-md p-4 m-2 contributor-card cursor-pointer';
+
+        contributorCard.innerHTML = `
+                <div class="flex items-center">
+                    <img
+                        src="${contributor.avatar}"
+                        alt="${contributor.name}'s avatar"
+                        class="w-16 h-16 rounded-full mr-4"
+                    />
+                    <div>
+                        <h3 class="text-xl font-bold text-blue-600">
+                            ${contributor.name}
+                        </h3>
+                        <p class="text-gray-600">${contributor.role}</p>
+                        <a
+                            href="https://github.com/${contributor.github}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="flex items-center text-gray-500 hover:text-blue-600"
+                        >
+                            <i data-feather="github" class="mr-2" width="16" height="16"></i> ${contributor.github}
+                        </a>
+                    </div>
+                </div>
+                <div class="contributions-details hidden mt-4 border-t pt-2">
+                    <h4 class="font-semibold text-gray-700">Key Contributions:</h4>
+                    <ul class="list-disc list-inside text-gray-600">
+                        ${contributor.contributions.map(contrib => `<li>${contrib}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+
+        // Toggle contributions on click
+        contributorCard.addEventListener('click', () => {
+            const contributionsDetails = contributorCard.querySelector('.contributions-details');
+            contributionsDetails.classList.toggle('hidden');
+            contributorCard.classList.toggle('scale-105');
+        });
+
+        contributorsContainer.appendChild(contributorCard);
+    });
+
+    // Dark Mode Toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    const body = document.body;
+
+    themeToggle.addEventListener('click', () => {
+        body.classList.toggle('dark-mode');
+
+        if (body.classList.contains('dark-mode')) {
+            themeIcon.setAttribute('data-feather', 'sun');
+        } else {
+            themeIcon.setAttribute('data-feather', 'moon');
+        }
+
+        // Reinitialize Feather icons
+        feather.replace();
+    });
+
+    // Initialize Feather icons
+    feather.replace();
+</script>
+</body>
+</html>
