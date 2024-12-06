@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let autoClickerActive = false;
     let autoClickerCount = 0;
     const maxAutoClickers = 1;
+    let doubleUpgradeCount = 0;
     const maxDoubleUpgrades = 5;
 
     const pointsDisplay = document.getElementById('points-display');
