@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     case 'upgrade6':
                         updatePoints(-cost);
                         // Regenerate a percentage of total points
-                        const regenerationAmount = Math.floor(points * 0.3);
+                        const regenerationAmount = Math.floor(points * 3);
                         updatePoints(regenerationAmount);
                         triggerTrollPopup(`Régénération : +${regenerationAmount} points !`);
                         break;
