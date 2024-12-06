@@ -786,3 +786,83 @@ document.addEventListener('keydown', (e) => {
         konamiIndex = 0;
     }
 });
+
+
+// ================ Animation du logo Lyreco ================
+const logo = document.querySelector('.lyreco');
+let currentInterval;
+let normalSpeed;
+
+function getRandomNumber(min, max) {
+    return Math.random() * (max - min) + min;
+}
+
+function moveRandomly() {
+    const maxX = window.innerWidth;
+    const maxY = window.innerHeight;
+
+    const randomX = Math.floor(Math.random() * maxX);
+    const randomY = Math.floor(Math.random() * maxY);
+    const rotation = Math.floor(Math.random() * 360);
+    const scaleX = getRandomNumber(0.5, 1);
+    const scaleY = getRandomNumber(0.5, 1);
+    const transitionSpeed = 1.25;
+
+    logo.style.transition = `all ${transitionSpeed}s ease-out`;
+    logo.style.transform = `translate(${randomX}px, ${randomY}px) rotate(${rotation}deg) scale(${scaleX}, ${scaleY})`;
+}
+
+function updateInterval(speed = null) {
+    if (currentInterval) {
+        clearInterval(currentInterval);
+    }
+    const intervalSpeed = speed || Math.floor(getRandomNumber(200, 1000));
+    normalSpeed = intervalSpeed; // Sauvegarder la vitesse normale
+    currentInterval = setInterval(moveRandomly, intervalSpeed);
+}
+
+function marioStar() {
+    // Jouer la musique
+    document.getElementById('mario-star').play();
+
+    // Ajouter la classe pour l'animation RGB
+    logo.classList.add('star-power');
+
+    // Accélérer les mouvements
+    updateInterval(75); // Vitesse rapide pendant l'effet étoile
+
+    // Après 10 secondes, retirer l'effet
+    setTimeout(() => {
+        logo.classList.remove('star-power');
+        document.getElementById('mario-star').pause();
+        updateInterval(); // Retour à la vitesse normale
+    }, 10000);
+}
+
+// Démarrer les animations de base
+updateInterval();
+moveRandomly();
+
+// ================ Création des bulles ================
+function createBubbles() {
+    const container = document.body;
+    for (let i = 0; i < 50; i++) {
+        const bubble = document.createElement('div');
+        bubble.classList.add('bubble');
+        bubble.style.width = `${Math.random() * 20 + 5}px`;
+        bubble.style.height = bubble.style.width;
+        bubble.style.left = `${Math.random() * 100}%`;
+        bubble.style.animationDuration = `${Math.random() * 10 + 5}s`;
+        bubble.style.animationDelay = `${Math.random() * 5}s`;
+        container.appendChild(bubble);
+    }
+}
+
+// Exécution au chargement
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(() => {
+        document.getElementById('captchaContainer').classList.remove('scale-0', 'opacity-0');
+    }, 500);
+});
+
+createBubbles();
