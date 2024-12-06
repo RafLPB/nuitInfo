@@ -6,6 +6,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
 
     <link rel="stylesheet" href="../ressources/css/navstyle.css">
+    <link rel="stylesheet" href="../ressources/css/podcast.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css" integrity="sha512-9xKTRVabjVeZmc+GUW8GgSmcREDunMM+Dt/GrzchfN8tkwHizc5RP4Ok/MXFFy5rIjJjzhndFScTceq5e6GvVQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <style>
         /* Styles pour le vacuum */
         #vacuum {
@@ -143,6 +146,16 @@
 <!-- Contenu Principal (Initialement Caché) -->
 <div class="main-content">
     <div class="ocean-container">
+
+        <audio id="myAudio" src="../ressources/audio/podcast-NDE.mp3"></audio>
+        <audio id="bubble" src="../ressources/audio/buuble.mp3"></audio>
+        <div class="podcast">
+            <h1>Podcast</h1>
+            <button onclick="changeState(0)" class="btn">Play <i class="fa-solid fa-play"></i></button>
+            <button onclick="changeState(1)" class="btn">Pause <i class="fa-solid fa-pause"></i></button>
+            <button onclick="changeState(2)" class="btn">Stop <i class="fa-solid fa-stop"></i></button>
+        </div>
+
         <a href="clicker.html">
         <div class="human-silhouette">
             <img src="../ressources/img/bonhomme.png" alt="Silhouette humaine">
@@ -187,6 +200,34 @@
 
 <!-- Scripts -->
 <script src="../ressources/JS/test.js"></script>
+
+<script>
+    function changeState(x) {
+        let btns = document.querySelectorAll(".btn");
+        let audio = document.querySelector ("#myAudio");
+        let bulles = document.querySelector ("#bubble");
+
+        for(let i = 0; i < btns.length; i++) {
+            btns[i].classList.remove("active");
+        }
+
+        btns[x].classList.add("active");
+        if (x == 0) {
+            audio.play();
+            bulles.play();
+        }
+        if (x == 1) {
+            audio.pause();
+            bulles.pause();
+        }
+        if (x == 2) {
+            audio.pause();
+            audio.currentTime = 0;
+            bulles.pause();
+            bulles.currentTime = 0;
+        }
+    }
+</script>
 
 </body>
 </html>

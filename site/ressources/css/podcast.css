@@ -1,0 +1,37 @@
+.podcast {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: transparent;
+    text-align: center;
+}
+
+/* Titre H1 */
+.podcast h1 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: white;
+}
+
+/* Style des boutons */
+.podcast button {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 25px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.podcast button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.podcast button:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
