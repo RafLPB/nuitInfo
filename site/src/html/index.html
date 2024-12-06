@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ocean Cleaner</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../../ressources/JS/test.js" defer></script>
+    <style>
+        #vacuum {
+            width: 50px;
+            height: 50px;
+            background: rgb(59, 130, 246);
+            border-radius: 50%;
+            position: absolute;
+            cursor: none;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+        }
+
+        #vacuum::before {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: rgba(59, 130, 246, 0.2);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 0.2; }
+            100% { transform: scale(1); opacity: 0.5; }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-200 to-blue-100 min-h-screen flex items-center justify-center">
+<!-- Captcha -->
+<div id="captchaContainer" class="scale-0 opacity-0 transition-all duration-300">
+    <div class="bg-white p-8 rounded-2xl shadow-2xl w-[320px] transform hover:scale-[1.02] transition-all">
+        <div class="flex items-center gap-4">
+            <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" id="captchaCheckbox" class="sr-only peer">
+                <div class="w-7 h-7 bg-white border-2 border-gray-300 rounded peer-checked:bg-blue-500 peer-checked:border-blue-500 transition-colors">
+                    <svg class="w-5 h-5 text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 hidden peer-checked:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                    </svg>
+                </div>
+            </label>
+            <span class="text-gray-700 font-medium">Je ne suis pas un robot</span>
+            <img src="https://www.gstatic.com/recaptcha/api2/logo_48.png" alt="reCAPTCHA" class="ml-auto h-10 opacity-80">
+        </div>
+        <div class="mt-4 flex justify-between text-xs text-gray-400">
+            <a href="#" class="hover:text-gray-600 transition-colors">Confidentialité</a>
+            <a href="#" class="hover:text-gray-600 transition-colors">Conditions</a>
+        </div>
+    </div>
+</div>
+
+<!-- Game Overlay -->
+<div id="gameOverlay" class="fixed inset-0 hidden bg-black/30 backdrop-blur-sm">
+    <div class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90vw] max-w-3xl">
+        <div class="bg-white rounded-3xl shadow-2xl overflow-hidden">
+            <div class="p-6 bg-gradient-to-r from-blue-600 to-blue-700">
+                <div class="flex justify-between items-center">
+                    <h2 class="text-2xl font-bold text-white">Nettoyez l'océan 🌊</h2>
+                    <div class="flex gap-4">
+                        <div id="level" class="px-6 py-2 bg-white/10 text-white rounded-full font-mono backdrop-blur-sm">
+                            Niveau 1
+                        </div>
+                        <div id="score" class="px-6 py-2 bg-white/10 text-white rounded-full font-mono backdrop-blur-sm">
+                            0/3
+                        </div>
+                        <div id="timer" class="px-6 py-2 bg-white/10 text-white rounded-full font-mono backdrop-blur-sm">
+                            3s
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="countdown" class="absolute inset-0 bg-black/80 flex items-center justify-center text-white text-8xl font-bold z-10">
+                3
+            </div>
+
+            <div id="gameArea" class="bg-gradient-to-b from-blue-200 to-blue-400 aspect-[16/9] relative overflow-hidden">
+                <div id="vacuum" class="absolute w-16 h-16 text-4xl cursor-none select-none">🧹</div>
+
+            </div>
+
+            <div class="p-6 bg-white flex justify-between items-center">
+                <p class="text-gray-500">Nettoie les déchets sans toucher les poissons !</p>
+                <div class="flex gap-4">
+                    <button id="continueSite" class="hidden px-6 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-full font-medium transition-colors">
+                        Accéder au site
+                    </button>
+                    <button id="nextLevel" class="hidden px-6 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-full font-medium transition-colors">
+                        Continuer à jouer →
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
