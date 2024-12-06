@@ -6,6 +6,9 @@ let score = 0;
 let gameLoop;
 let canStart = false;
 let totalTrashRequired = 0;
+let successDialogDisplayed = false;
+let failureDialogDisplayed = false;
+
 
 const FISH_TYPES = {
     common: ['🐟', '🐠', '🐡'],
@@ -67,6 +70,11 @@ elements.nextLevel.addEventListener('click', () => {
 
 elements.continueSite.addEventListener('click', () => {
     window.location.href = '../index.html';
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    const captchaCheckbox = document.getElementById("captchaCheckbox");
+    captchaCheckbox.checked = false; // Assure que la checkbox est décochée
 });
 
 // ================ Gestion du jeu ================
@@ -136,11 +144,9 @@ function initializeStartingPhase() {
     const centerX = (gameRect.width / 2) - (elements.vacuum.offsetWidth / 2);
     const centerY = (gameRect.height / 2) - (elements.vacuum.offsetHeight / 2);
 
-    // Position initiale au centre
     elements.vacuum.style.left = `${centerX}px`;
     elements.vacuum.style.top = `${centerY}px`;
 
-    // Zone de sécurité
     const safeZone = document.createElement('div');
     safeZone.className = 'absolute bg-blue-200 bg-opacity-20 rounded-full transition-all duration-1000';
     safeZone.style.width = '200px';
@@ -149,7 +155,6 @@ function initializeStartingPhase() {
     safeZone.style.top = `${centerY - 75}px`;
     elements.gameArea.appendChild(safeZone);
 
-    // Message de démarrage
     const startMessage = document.createElement('div');
     startMessage.className = 'absolute text-blue-800 font-bold text-xl text-center transition-opacity duration-500';
     startMessage.style.width = '200px';
@@ -171,32 +176,26 @@ function initializeStartingPhase() {
         }
     }, 1000);
 
-    // Créer les éléments après un délai
     setTimeout(() => {
         createElementsWithSafeZone(centerX, centerY);
     }, 500);
 }
 
-// Modification de createElementsWithSafeZone pour garantir le bon comptage
 function createElementsWithSafeZone(centerX, centerY) {
     const currentDifficulty = calculateDifficulty();
     const existingPositions = [];
 
-    // Nettoyer la zone
     const oldElements = elements.gameArea.querySelectorAll('[data-type]');
     oldElements.forEach(el => {
         if (el !== elements.vacuum) el.remove();
     });
 
-    // Reset score et totalTrashRequired
     score = 0;
     totalTrashRequired = currentDifficulty.trashCount;
-    console.log('Setting initial trash count:', totalTrashRequired); // Debug
+    console.log('Setting initial trash count:', totalTrashRequired);
 
-    // Mettre à jour l'affichage du score
     elements.score.textContent = `0/${totalTrashRequired}`;
 
-    // Créer les déchets
     let trashCreated = 0;
     for (let i = 0; i < totalTrashRequired; i++) {
         const position = generateSafePosition(existingPositions, centerX, centerY);
@@ -212,14 +211,12 @@ function createElementsWithSafeZone(centerX, centerY) {
         }
     }
 
-    // Vérifier que tous les déchets ont été créés
     if (trashCreated !== totalTrashRequired) {
         console.warn(`Only created ${trashCreated} trash items out of ${totalTrashRequired}`);
         totalTrashRequired = trashCreated;
         elements.score.textContent = `0/${totalTrashRequired}`;
     }
 
-    // Créer les poissons
     const fishCount = currentDifficulty.fishCount;
     for (let i = 0; i < fishCount; i++) {
         const position = generateSafePosition(existingPositions, centerX, centerY);
@@ -238,17 +235,14 @@ function createElementsWithSafeZone(centerX, centerY) {
 function selectTrashType(level) {
     const random = Math.random();
     if (level <= 2) {
-        // Niveaux faciles: uniquement déchets communs
         return TRASH_TYPES.common[Math.floor(Math.random() * TRASH_TYPES.common.length)];
     } else if (level <= 4) {
-        // Niveaux moyens: déchets communs + huiles
         if (random < 0.7) {
             return TRASH_TYPES.common[Math.floor(Math.random() * TRASH_TYPES.common.length)];
         } else {
             return TRASH_TYPES.oil[Math.floor(Math.random() * TRASH_TYPES.oil.length)];
         }
     } else {
-        // Niveaux difficiles: tous les types
         if (random < 0.5) {
             return TRASH_TYPES.common[Math.floor(Math.random() * TRASH_TYPES.common.length)];
         } else if (random < 0.8) {
@@ -266,10 +260,8 @@ function selectFishType(level) {
     let selectedType;
 
     if (level <= 2) {
-        // Niveaux faciles: seulement les poissons communs
         selectedType = FISH_TYPES.common;
     } else if (level <= 4) {
-        // Niveaux moyens: poissons communs et rares
         selectedType = random < 0.7 ? FISH_TYPES.common : FISH_TYPES.rare;
     } else {
         // Niveaux difficiles: tous les types
@@ -282,7 +274,6 @@ function selectFishType(level) {
         }
     }
 
-    // Sélectionner un poisson aléatoire du type choisi
     return selectedType[Math.floor(Math.random() * selectedType.length)];
 }
 
@@ -324,13 +315,10 @@ function createGameElementAtPosition(emoji, type, x, y) {
     element.textContent = emoji;
     element.dataset.type = type;
 
-    // Position en pixels
     if (type === 'fish') {
-        // Les poissons utilisent des pourcentages pour l'animation
         element.style.left = `${(x / elements.gameArea.offsetWidth) * 100}%`;
         element.style.top = `${y}px`;
     } else {
-        // Les déchets utilisent des pixels
         element.style.left = `${x}px`;
         element.style.top = `${y}px`;
     }
@@ -358,7 +346,6 @@ function animateFish(fish) {
         if (!elements.gameArea.contains(fish)) return;
         position += direction * speed;
 
-        // Limites de mouvement
         if (position > 90) {
             direction = -1;
             position = 90;
@@ -427,16 +414,13 @@ function checkCollisions() {
     const items = document.querySelectorAll('[data-type]');
 
     items.forEach(item => {
-        // Ignorer les éléments en cours de collecte
         if (item.dataset.collecting) return;
 
         const itemRect = item.getBoundingClientRect();
         if (isColliding(vacuumRect, itemRect)) {
             if (item.dataset.type === 'trash') {
-                // Marquer comme en cours de collecte
                 item.dataset.collecting = 'true';
 
-                // Animation de collecte
                 item.style.transform = 'scale(0)';
                 item.style.opacity = '0';
 
@@ -445,7 +429,6 @@ function checkCollisions() {
 
                 setTimeout(() => {
                     item.remove();
-                    // Vérifier si le niveau est terminé
                     if (score === totalTrashRequired) {
                         levelComplete();
                     }
@@ -490,14 +473,15 @@ function updateTimer() {
 
 // ================ Gestion des niveaux et dialogues ================
 function levelComplete() {
+    if (successDialogDisplayed || failureDialogDisplayed) return;
     clearInterval(gameLoop);
     canStart = false;
 
     if (level === 10) {
-        showEasterEgg(); // Affiche l'easter egg
+        showEasterEgg();
     } else if (level === 20) {
-        endGame(); // Terminer le jeu
-        return; // Empêche de continuer au-delà du niveau 20
+        endGame();
+        return;
     }
 
     if (!verified) {
@@ -508,10 +492,21 @@ function levelComplete() {
     }
 }
 
+function fail() {
+    if (successDialogDisplayed || failureDialogDisplayed) return;
+    clearInterval(gameLoop);
+    canStart = false;
+
+    if (!verified) {
+        showResult(false);
+    } else {
+        showFailureDialog();
+    }
+}
+
 function showEasterEgg() {
     const easterEggDialog = document.createElement('div');
-    easterEggDialog.className = 'fixed inset-0 bg-purple-500 bg-opacity-90 flex items-center justify-center z-50';
-    easterEggDialog.innerHTML = `
+    easterEggDialog.className = 'fixed inset-0 bg-purple-500 bg-opacity-90 flex items-center justify-center z-[9999]';    easterEggDialog.innerHTML = `
         <div class="bg-white rounded-2xl shadow-lg p-8 max-w-md w-full mx-4 transform scale-0 transition-all duration-300">
             <div class="text-center">
                 <div class="text-6xl mb-4">🎉</div>
@@ -541,16 +536,13 @@ function showEasterEgg() {
 
 function endGame() {
     const endDialog = document.createElement('div');
-    endDialog.className = 'fixed inset-0 bg-red-500 bg-opacity-90 flex items-center justify-center z-50';
+    endDialog.className = 'fixed inset-0 bg-red-500 bg-opacity-90 flex items-center justify-center z-[9999]';
     endDialog.innerHTML = `
         <div class="bg-white rounded-2xl shadow-lg p-8 max-w-md w-full mx-4 transform scale-0 transition-all duration-300">
             <div class="text-center">
                 <div class="text-6xl mb-4">🏆</div>
                 <div class="text-2xl font-bold text-gray-800 mb-4">Félicitations !</div>
                 <p class="text-gray-600 mb-6">Vous avez terminé le jeu après 20 niveaux.</p>
-                <button id="restartGame" class="w-full py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors font-bold">
-                    Rejouer
-                </button>
             </div>
         </div>
     `;
@@ -558,21 +550,25 @@ function endGame() {
     document.body.appendChild(endDialog);
     requestAnimationFrame(() => endDialog.querySelector('div').classList.remove('scale-0'));
 
-    document.getElementById('restartGame').onclick = () => {
+    setTimeout(() => {
         endDialog.classList.add('opacity-0');
         setTimeout(() => {
             endDialog.remove();
-            level = 1; // Réinitialise le niveau
-            startCountdown(); // Relance le jeu
+            redirectToMainSite();
         }, 300);
-    };
+    }, 2000);
 }
 
-
+function redirectToMainSite() {
+    document.getElementById("gameOverlay").style.display = "none";
+    const mainContent = document.querySelector(".main-content");
+    mainContent.style.display = "block";
+    createBubbles();
+}
 
 function showAuthSuccess() {
     const auth = document.createElement('div');
-    auth.className = 'fixed inset-0 bg-green-500 bg-opacity-90 flex items-center justify-center z-50';
+    auth.className = 'fixed inset-0 bg-green-500     bg-opacity-90 flex items-center justify-center z-[9999]';
     auth.innerHTML = `
         <div class="bg-white rounded-2xl shadow-lg p-8 max-w-md w-full mx-4 transform scale-0 transition-all duration-300">
             <div class="text-center">
@@ -590,6 +586,7 @@ function showAuthSuccess() {
         </div>
     `;
 
+    document.getElementById('gameOverlay').style.zIndex = '150';
     document.body.appendChild(auth);
     requestAnimationFrame(() => auth.querySelector('div').classList.remove('scale-0'));
 
@@ -603,16 +600,31 @@ function showAuthSuccess() {
     };
 
     document.getElementById('authContinueSite').onclick = () => {
-        window.location.href = '../index.html';
+        auth.classList.add('opacity-0');
+        setTimeout(() => {
+            auth.remove();
+            document.getElementById('gameOverlay').style.display = 'none';
+            const mainContent = document.querySelector('.main-content');
+            mainContent.style.display = 'block';
+            createBubbles();
+        }, 300);
     };
 }
 
+elements.checkbox.addEventListener('change', () => {
+    if (elements.checkbox.checked) {
+        closeCaptchaPopup();
+        elements.overlay.classList.remove('hidden');
+        elements.overlay.style.zIndex = '9998';
+        startCountdown();
+    }
+});
 function showSuccess() {
-    if (successDialogDisplayed) return; // Empêche un appel multiple
+    if (successDialogDisplayed) return;
     successDialogDisplayed = true;
 
     const successDialog = document.createElement('div');
-    successDialog.className = 'fixed inset-0 bg-green-500 bg-opacity-90 flex items-center justify-center z-50';
+    successDialog.className = 'fixed inset-0 bg-green-500 bg-opacity-90 flex items-center justify-center z-[9999]';
     successDialog.innerHTML = `
         <div class="bg-white rounded-2xl shadow-lg p-8 max-w-md w-full mx-4 transform scale-0 transition-all duration-300">
             <div class="text-center">
@@ -631,6 +643,7 @@ function showSuccess() {
         </div>
     `;
 
+    document.getElementById('gameOverlay').style.zIndex = '150';
     document.body.appendChild(successDialog);
     requestAnimationFrame(() => successDialog.querySelector('div').classList.remove('scale-0'));
 
@@ -638,34 +651,29 @@ function showSuccess() {
         successDialog.classList.add('opacity-0');
         setTimeout(() => {
             successDialog.remove();
-            successDialogDisplayed = false; // Réinitialiser le drapeau
+            successDialogDisplayed = false;
             level++;
             startCountdown();
         }, 300);
     };
 
     document.getElementById('exitGameBtn').onclick = () => {
-        window.location.href = '../index.html';
+        successDialog.classList.add('opacity-0');
+        setTimeout(() => {
+            successDialog.remove();
+            document.getElementById('gameOverlay').style.display = 'none';
+            const mainContent = document.querySelector('.main-content');
+            mainContent.style.display = 'block';
+            createBubbles();
+        }, 300);
     };
 }
-
-
-function fail() {
-    clearInterval(gameLoop);
-    canStart = false;
-
-    if (!verified) {
-        showResult(false);
-    } else {
-        showFailureDialog();
-    }
-}
 function showFailureDialog() {
-    if (failureDialogDisplayed) return; // Empêche un appel multiple
+    if (failureDialogDisplayed) return;
     failureDialogDisplayed = true;
 
     const failureDialog = document.createElement('div');
-    failureDialog.className = 'fixed inset-0 bg-red-500 bg-opacity-90 flex items-center justify-center z-50';
+    failureDialog.className = 'fixed inset-0 bg-red-500 bg-opacity-90 flex items-center justify-center z-[9999]';
     failureDialog.innerHTML = `
         <div class="bg-white rounded-2xl shadow-lg p-8 max-w-md w-full mx-4 transform scale-0 transition-all duration-300">
             <div class="text-center">
@@ -684,6 +692,7 @@ function showFailureDialog() {
         </div>
     `;
 
+    document.getElementById('gameOverlay').style.zIndex = '150';
     document.body.appendChild(failureDialog);
     requestAnimationFrame(() => failureDialog.querySelector('div').classList.remove('scale-0'));
 
@@ -691,21 +700,34 @@ function showFailureDialog() {
         failureDialog.classList.add('opacity-0');
         setTimeout(() => {
             failureDialog.remove();
-            failureDialogDisplayed = false; // Réinitialiser le drapeau
+            failureDialogDisplayed = false;
             startCountdown();
         }, 300);
     };
 
     document.getElementById('quitBtn').onclick = () => {
-        window.location.href = '../index.html';
+        failureDialog.classList.add('opacity-0');
+        setTimeout(() => {
+            failureDialog.remove();
+            document.getElementById('gameOverlay').style.display = 'none';
+            const mainContent = document.querySelector('.main-content');
+            mainContent.style.display = 'block';
+            createBubbles();
+        }, 300);
     };
 }
 
+function closeCaptchaPopup() {
+    const captchaContainer = document.getElementById('captchaContainer');
+    captchaContainer.classList.add('scale-0', 'opacity-0');
+    setTimeout(() => {
+        captchaContainer.style.display = 'none'; // Au lieu de remove()
+    }, 300);
+}
 
 function showResult(success) {
     const result = document.createElement('div');
-    result.className = `fixed inset-0 ${success ? 'bg-green-500' : 'bg-red-500'} bg-opacity-90 flex items-center justify-center z-50 transition-all duration-300`;
-    result.innerHTML = `
+    result.className = `fixed inset-0 ${success ? 'bg-green-500' : 'bg-red-500'} bg-opacity-90 flex items-center justify-center z-[9999] transition-all duration-300`;    result.innerHTML = `
         <div class="bg-white rounded-2xl shadow-lg p-8 max-w-md w-full mx-4 transform scale-0 transition-all duration-300">
             <div class="text-center">
                 <div class="text-6xl mb-4">${success ? '✓' : '😢'}</div>
