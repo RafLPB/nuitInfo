@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Loch Ness Confronté à la Crise Climatique</title>
+    <link rel="stylesheet" href="../../ressources/css/styleVueOrgane.css">
+    <script>
+        let currentSlide = 0;
+
+        function checkAnswer(questionNumber, selectedAnswer, buttonElement) {
+            const correctAnswers = {
+                '1': 'Changement climatique',
+                '2': 'Séchère prolongée',
+                '3': 'Rareté de l’eau dans les Highlands'
+            };
+
+            if (selectedAnswer === correctAnswers[questionNumber]) {
+                buttonElement.classList.add('correct');
+                setTimeout(() => {
+                    currentSlide++;
+                    showSlide(currentSlide);
+                }, 1000);
+            } else {
+                buttonElement.classList.add('wrong');
+            }
+        }
+
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.quiz-slide');
+            const controls = document.querySelectorAll('.quiz-control-btn');
+
+            if (n >= slides.length) {
+                console.log("Quiz terminé !");
+                return;
+            }
+
+            slides.forEach((slide, index) => {
+                slide.classList.toggle('active', index === n);
+            });
+            controls.forEach((control, index) => {
+                control.classList.toggle('active', index === n);
+            });
+        }
+
+        showSlide(currentSlide);
+
+        const controls = document.querySelectorAll('.quiz-control-btn');
+        controls.forEach((control, index) => {
+            control.addEventListener('click', () => {
+                currentSlide = index;
+                showSlide(currentSlide);
+            });
+        });
+
+    </script>
+</head>
+<body>
+<header>
+    <h1>Le Loch Ness Confronté à la Crise Climatique</h1>
+</header>
+
+<div class="container">
+    <main>
+        <a type="button" href="../vueOrgane/reins.html"> <- Retour </a>
+
+        <h2 class="section-title">Le Loch Ness et le Changement Climatique : Une Crise Écologique</h2>
+
+        <div class="article">
+            <div class="metaphore">
+                <h3>Introduction</h3>
+                <p>Le Loch Ness, célèbre lac écossais, traverse une crise climatique sans précédent. En 2023, le niveau de l'eau n'a jamais été aussi bas depuis des décennies. Ce phénomène est dû à plusieurs mois de sécheresse marqués par des températures records et un manque de précipitations, particulièrement en juin 2023. La baisse du niveau d'eau affecte gravement l'écosystème local, notamment le saumon, espèce menacée dans la région.</p>
+
+                <p>Le changement climatique transforme les conditions météorologiques en Écosse, rendant les périodes de sécheresse plus fréquentes et prolongées. Les experts mettent en garde contre les conséquences graves sur la faune et la flore locale, avec des risques d'extinction pour certaines espèces comme le saumon, vital pour la pêche locale et l'économie touristique.</p>
+
+                <p>En 2023, le Loch Ness a enregistré un niveau d'eau de seulement 109 cm de profondeur, une situation inquiétante pour les pêcheurs locaux et les entreprises qui dépendent de cette ressource précieuse. Selon les experts, ce type de sécheresse deviendra plus fréquent dans les décennies à venir, augmentant les risques de pénuries d'eau et de pertes écologiques dans cette région normalement humide.</p>
+            </div>
+
+            <div class="mascotte-container hover-qr">
+                <div class="mascotte-container">
+                    <div class="mascotte-bubble">Le savais-tu ?</div>
+                    <img src="../../ressources/img/mascotteRequin1.png" alt="image mascotte">
+                </div>
+            </div>
+        </div>
+
+        <div class="consequences">
+            <div class="bon-fonctionnement">
+                <h4>Un Écosystème en Bonne Santé</h4>
+                <p>Un climat humide et stable permet à la faune du Loch Ness de prospérer. Les eaux riches en saumons et en autres espèces marines contribuent à maintenir l'équilibre de l'écosystème local. Les touristes, attirés par la beauté et la richesse de ce lieu, soutiennent l'économie de la région.</p>
+                <br>
+                <div class="mascotte-container">
+                    <div class="mascotte-bubble">Un bel équilibre !</div>
+                    <img src="../../ressources/img/mascotteRequin3.png" alt="image mascotte">
+                </div>
+            </div>
+
+            <div class="mauvais-fonctionnement">
+                <h4>Impact de la Crise Climatique</h4>
+                <p>La baisse des niveaux d'eau et la sécheresse prolongée perturbent gravement l'équilibre écologique du Loch Ness. Le manque d'eau affecte la survie des poissons, en particulier le saumon, une espèce en danger. Les pêcheurs locaux et les entreprises qui dépendent de ce lac pour le tourisme sont également frappés par cette crise. Le changement climatique pourrait entraîner des périodes de sécheresse plus fréquentes, transformant le climat écossais et aggravant la crise.</p>
+                <br>
+                <div class="mascotte-container">
+                    <div class="mascotte-bubble">C'est préoccupant...</div>
+                    <img src="../../ressources/img/mascotteRequin4.png" alt="image mascotte">
+                </div>
+            </div>
+        </div>
+
+        <div class="quiz-container">
+            <div class="quiz-slide active">
+                <div class="quiz-question">
+                    Quelle est la cause principale de la crise du Loch Ness en 2023 ?
+                </div>
+                <div class="quiz-options">
+                    <button onclick="checkAnswer('1', 'Changement climatique', this)">Changement climatique</button>
+                    <button onclick="checkAnswer('1', 'Pollution industrielle', this)">Pollution industrielle</button>
+                    <button onclick="checkAnswer('1', 'Pêche excessive', this)">Pêche excessive</button>
+                </div>
+                <div id="quiz-result1-" class="quiz-result"></div>
+            </div>
+
+            <div class="quiz-slide">
+                <div class="quiz-question">
+                    Quel phénomène naturel a aggravé la crise du Loch Ness en 2023 ?
+                </div>
+                <div class="quiz-options">
+                    <button onclick="checkAnswer('2', 'Séchère prolongée', this)">Séchère prolongée</button>
+                    <button onclick="checkAnswer('2', 'Tempêtes fréquentes', this)">Tempêtes fréquentes</button>
+                    <button onclick="checkAnswer('2', 'Inondations', this)">Inondations</button>
+                </div>
+                <div id="quiz-result-2" class="quiz-result"></div>
+            </div>
+
+            <div class="quiz-slide">
+                <div class="quiz-question">
+                    Quel est l'impact de la crise du Loch Ness sur les écosystèmes locaux ?
+                </div>
+                <div class="quiz-options">
+                    <button onclick="checkAnswer('3', 'Rareté de l’eau dans les Highlands', this)">Rareté de l’eau dans les Highlands</button>
+                    <button onclick="checkAnswer('3', 'Augmentation de la biodiversité', this)">Augmentation de la biodiversité</button>
+                    <button onclick="checkAnswer('3', 'Réduction des populations de poissons', this)">Réduction des populations de poissons</button>
+                </div>
+                <div id="quiz-result-3" class="quiz-result"></div>
+            </div>
+
+            <div class="quiz-slide">
+                <img src="../../ressources/img/mascotteRequin2.png" alt="requin content">
+                <h1>C'est gagné !!!</h1>
+                <div id="quiz-result-4" class="quiz-result"></div>
+
+            </div>
+
+            <div class="quiz-controls">
+                <button class="quiz-control-btn active">1</button>
+                <button class="quiz-control-btn">2</button>
+                <button class="quiz-control-btn">3</button>
+            </div>
+        </div>
+    </main>
+</div>
+
+<footer>
+    <p>&copy; 2024 Loch Ness et la Crise Climatique - Un Appel à l'Aide</p>
+</footer>
+</body>
+</html>

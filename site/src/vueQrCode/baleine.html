@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Massacre des Baleines : Une Tragédie Marine</title>
+    <link rel="stylesheet" href="../../ressources/css/styleVueOrgane.css">
+    <script>
+        let currentSlide = 0;
+
+        function checkAnswer(questionNumber, selectedAnswer, buttonElement) {
+            const correctAnswers = {
+                '1': 'Préservation des baleines',
+                '2': 'Extinction des espèces marines',
+                '3': 'Pollution des océans et pêche illégale'
+            };
+
+            if (selectedAnswer === correctAnswers[questionNumber]) {
+                buttonElement.classList.add('correct');
+                setTimeout(() => {
+                    currentSlide++;
+                    showSlide(currentSlide);
+                }, 1000);
+            } else {
+                buttonElement.classList.add('wrong');
+            }
+        }
+
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.quiz-slide');
+            const controls = document.querySelectorAll('.quiz-control-btn');
+
+            if (n >= slides.length) {
+                console.log("Quiz terminé !");
+                return;
+            }
+
+            slides.forEach((slide, index) => {
+                slide.classList.toggle('active', index === n);
+            });
+            controls.forEach((control, index) => {
+                control.classList.toggle('active', index === n);
+            });
+        }
+
+        showSlide(currentSlide);
+
+        const controls = document.querySelectorAll('.quiz-control-btn');
+        controls.forEach((control, index) => {
+            control.addEventListener('click', () => {
+                currentSlide = index;
+                showSlide(currentSlide);
+            });
+        });
+
+    </script>
+</head>
+<body>
+<header>
+    <h1>Massacre des Baleines : Une Tragédie Marine</h1>
+</header>
+
+<div class="container">
+    <main>
+        <a type="button" href="../vueOrgane/coeur.html"> <- Retour </a>
+
+        <h2 class="section-title">Massacre des Baleines → Une Tragédie Écologique</h2>
+
+        <div class="article">
+            <div class="metaphore">
+                <h3>Introduction</h3>
+                <p>Le massacre des baleines est l'une des plus grandes tragédies écologiques de notre époque. Les baleines, ces géants majestueux des océans, ont été pourchassées pendant des siècles pour leur graisse, leur chair et leurs os. Aujourd'hui encore, malgré les efforts de préservation, elles font face à de nombreux dangers, notamment la pêche illégale et les effets dévastateurs de la pollution marine.</p>
+
+                <p>Les baleines jouent un rôle crucial dans l'écosystème marin, en contribuant à l'équilibre des populations de poissons et à la santé des océans. Leur préservation est essentielle pour maintenir la biodiversité marine et lutter contre les effets du changement climatique.</p>
+
+                <p>Il est vital de comprendre les conséquences de cette chasse excessive, non seulement sur les baleines, mais aussi sur toute la chaîne alimentaire marine, ainsi que sur les populations humaines qui dépendent des océans pour leur subsistance.</p>
+            </div>
+
+            <div class="mascotte-container hover-qr">
+                <div class="mascotte-container">
+                    <div class="mascotte-bubble">Le savais-tu ?</div>
+                    <img src="../../ressources/img/mascotteRequin1.png" alt="image mascotte">
+                </div>
+            </div>
+        </div>
+
+        <div class="consequences">
+            <div class="bon-fonctionnement">
+                <h4>Équilibre Marin</h4>
+                <p>Les baleines sont essentielles au maintien de l'équilibre des écosystèmes marins. Leur présence assure la régulation des populations de certaines espèces marines et contribue à l'absorption du CO₂, réduisant ainsi les effets du changement climatique. Leur rôle dans la chaîne alimentaire marine est fondamental pour la santé globale des océans.</p>
+                <br>
+                <div class="mascotte-container">
+                    <div class="mascotte-bubble">C'est essentiel !</div>
+                    <img src="../../ressources/img/mascotteRequin3.png" alt="image mascotte">
+                </div>
+            </div>
+
+            <div class="mauvais-fonctionnement">
+                <h4>Impact de la Chasse</h4>
+                <p>Le massacre des baleines a des conséquences dramatiques pour la biodiversité marine. La réduction de leur nombre perturbe la chaîne alimentaire, affectant ainsi de nombreuses espèces marines, y compris celles qui sont vitales pour la pêche commerciale. La perte de baleines impacte également l'absorption du CO₂ par les océans, exacerbant les effets du réchauffement climatique.</p>
+                <br>
+                <div class="mascotte-container">
+                    <div class="mascotte-bubble">C'est tragique...</div>
+                    <img src="../../ressources/img/mascotteRequin4.png" alt="image mascotte">
+                </div>
+            </div>
+        </div>
+
+        <div class="quiz-container">
+            <div class="quiz-slide active">
+                <div class="quiz-question">
+                    Pourquoi les baleines sont-elles si importantes pour l'écosystème marin ?
+                </div>
+                <div class="quiz-options">
+                    <button onclick="checkAnswer('1', 'Préservation des baleines', this)">Préservation des baleines</button>
+                    <button onclick="checkAnswer('1', 'Chasse excessive', this)">Chasse excessive</button>
+                    <button onclick="checkAnswer('1', 'Pollution des océans', this)">Pollution des océans</button>
+                </div>
+                <div id="quiz-result1-" class="quiz-result"></div>
+            </div>
+
+            <div class="quiz-slide">
+                <div class="quiz-question">
+                    Quelle conséquence le massacre des baleines a-t-il sur les océans ?
+                </div>
+                <div class="quiz-options">
+                    <button onclick="checkAnswer('2', 'Extinction des espèces marines', this)">Extinction des espèces marines</button>
+                    <button onclick="checkAnswer('2', 'Augmentation du nombre de poissons', this)">Augmentation du nombre de poissons</button>
+                    <button onclick="checkAnswer('2', 'Réduction des déchets marins', this)">Réduction des déchets marins</button>
+                </div>
+                <div id="quiz-result-2" class="quiz-result"></div>
+            </div>
+
+            <div class="quiz-slide">
+                <div class="quiz-question">
+                    Quels sont les facteurs qui menacent les baleines aujourd'hui ?
+                </div>
+                <div class="quiz-options">
+                    <button onclick="checkAnswer('3', 'Pollution des océans et pêche illégale', this)">Pollution des océans et pêche illégale</button>
+                    <button onclick="checkAnswer('3', 'Changement climatique uniquement', this)">Changement climatique uniquement</button>
+                    <button onclick="checkAnswer('3', 'Réduction de la biodiversité marine', this)">Réduction de la biodiversité marine</button>
+                </div>
+                <div id="quiz-result-3" class="quiz-result"></div>
+            </div>
+
+            <div class="quiz-slide">
+                <img src="../../ressources/img/mascotteRequin2.png" alt="requin content">
+                <h1>C'est gagné !!!</h1>
+                <div id="quiz-result-4" class="quiz-result"></div>
+
+            </div>
+
+            <div class="quiz-controls">
+                <button class="quiz-control-btn active">1</button>
+                <button class="quiz-control-btn">2</button>
+                <button class="quiz-control-btn">3</button>
+            </div>
+        </div>
+    </main>
+</div>
+
+<footer>
+    <p>&copy; 2024 Sauvez les Baleines - Un appel à l'action</p>
+</footer>
+</body>
+</html>
