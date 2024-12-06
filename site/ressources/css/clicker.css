@@ -10,7 +10,7 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: linear-gradient(135deg, #e0f7fa 0%, #80deea 100%);
+    background: linear-gradient(160deg, #0077be, #00293c);
     font-size: 16px;
     line-height: 1.6;
     user-select: none;
@@ -121,4 +121,22 @@ body {
     padding: 20px;
     border-radius: 10px;
     text-align: center;
+}
+#home-button-container {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#home-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #00acc1;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#home-btn:hover {
+    background-color: #0077be;
 }
