@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const maxAutoClickers = 1;
     let doubleUpgradeCount = 0;
     const maxDoubleUpgrades = 5;
+    let doubleUpgradeCooldown = false;
 
     const pointsDisplay = document.getElementById('points-display');
     const oceanPulseBtn = document.getElementById('ocean-pulse-btn');
@@ -80,12 +81,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (points >= cost) {
                 switch (button.id) {
-                    case 'upgrade1': // Doublez vos points
+                    case 'upgrade1':
                         if (doubleUpgradeCount < maxDoubleUpgrades) {
-                            updatePoints(-cost);
-                            points *= 2;
-                            doubleUpgradeCount++;
-                            triggerTrollPopup("Doublement océanique !");
+                            if (!doubleUpgradeCooldown) {
+                                updatePoints(-cost);
+                                points *= 2;
+                                doubleUpgradeCount++;
+                                triggerTrollPopup("Doublement océanique !");
+                                doubleUpgradeCooldown = true;
+
+
+                                setTimeout(() => {
+                                    doubleUpgradeCooldown = false;
+                                }, 30000);
+                            } else {
+                                triggerTrollPopup("Un peu de patience !");
+                            }
                         } else {
                             updatePoints(-cost);
                             triggerTrollPopup("Vous vous êtes fait doubler !");
