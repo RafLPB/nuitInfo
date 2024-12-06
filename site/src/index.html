@@ -3,38 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <title>AquaPulse - Voyage Intérieur</title>
+
     <link rel="stylesheet" href="../ressources/css/navstyle.css">
+    <link rel="stylesheet" href="../ressources/css/lyreco.css">
 </head>
 <body>
+<div class="lyreco" onclick="marioStar(); play()">
+    <audio id="mario-star" src="../ressources/audio/mario-star.mp3"></audio>
+    <img src="../ressources/img/lyreco.svg" draggable="false">
+</div>
+
 <div class="ocean-container">
     <div class="human-silhouette">
         <img src="../ressources/img/bonhomme.png" alt="Silhouette humaine">
     </div>
     <a href="vueOrgane/coeur.html" class="organ-link">
-    <div class="organ" id="coeur">
-        <img src="../ressources/img/organes/coeur.png" alt="Coeur">
-        <p>Coeur</p>
-    </div>
+        <div class="organ" id="coeur">
+            <img src="../ressources/img/organes/coeur.png" alt="Coeur">
+            <p>Coeur</p>
+        </div>
     </a>
     <a href="vueOrgane/poumons.html" class="organ-link">
-    <div class="organ" id="poumons">
-        <img src="../ressources/img/organes/poumons.png" alt="Poumons">
-        <p>Poumons</p>
-    </div>
+        <div class="organ" id="poumons">
+            <img src="../ressources/img/organes/poumons.png" alt="Poumons">
+            <p>Poumons</p>
+        </div>
     </a>
 
     <a href="vueOrgane/estomac.html" class="organ-link">
-    <div class="organ" id="estomac">
-        <img src="../ressources/img/organes/estomac.png" alt="Estomac">
-        <p>Estomac</p>
-    </div>
+        <div class="organ" id="estomac">
+            <img src="../ressources/img/organes/estomac.png" alt="Estomac">
+            <p>Estomac</p>
+        </div>
     </a>
 
     <a href="vueOrgane/reins.html" class="organ-link">
-    <div class="organ" id="reins">
-        <img src="../ressources/img/organes/reins.png" alt="Reins">
-        <p>Reins</p>
-    </div>
+        <div class="organ" id="reins">
+            <img src="../ressources/img/organes/reins.png" alt="Reins">
+            <p>Reins</p>
+        </div>
     </a>
 </div>
 
@@ -64,6 +71,60 @@
         }
     }
     createBubbles();
+
+    const logo = document.querySelector('.lyreco');
+    let currentInterval;
+    let normalSpeed;
+
+    function getRandomNumber(min, max) {
+        return Math.random() * (max - min) + min;
+    }
+
+    function moveRandomly() {
+        const maxX = window.innerWidth;
+        const maxY = window.innerHeight;
+
+        const randomX = Math.floor(Math.random() * maxX);
+        const randomY = Math.floor(Math.random() * maxY);
+        const rotation = Math.floor(Math.random() * 360);
+        const scaleX = getRandomNumber(0.5, 1);
+        const scaleY = getRandomNumber(0.5, 1);
+        const transitionSpeed = 1.25;
+
+        logo.style.transition = `all ${transitionSpeed}s ease-out`;
+        logo.style.transform = `translate(${randomX}px, ${randomY}px) rotate(${rotation}deg) scale(${scaleX}, ${scaleY})`;
+    }
+
+    function updateInterval(speed = null) {
+        if (currentInterval) {
+            clearInterval(currentInterval);
+        }
+        const intervalSpeed = speed || Math.floor(getRandomNumber(200, 1000));
+        normalSpeed = intervalSpeed; // Sauvegarder la vitesse normale
+        currentInterval = setInterval(moveRandomly, intervalSpeed);
+    }
+
+    function marioStar() {
+        // Jouer la musique
+        document.getElementById('mario-star').play();
+
+        // Ajouter la classe pour l'animation RGB
+        logo.classList.add('star-power');
+
+        // Accélérer les mouvements
+        updateInterval(75); // Vitesse rapide pendant l'effet étoile
+
+        // Après 10 secondes, retirer l'effet
+        setTimeout(() => {
+            logo.classList.remove('star-power');
+            document.getElementById('mario-star').pause();
+            updateInterval(); // Retour à la vitesse normale
+        }, 10000);
+    }
+
+    // Démarrer les animations de base
+    updateInterval();
+    moveRandomly();
 </script>
 </body>
 </html>
