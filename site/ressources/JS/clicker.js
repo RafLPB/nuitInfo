@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const upgradeButtons = document.querySelectorAll('.upgrade-btn');
     const trollOverlay = document.getElementById('troll-overlay');
     const trollPopup = document.querySelector('.troll-popup');
-
+    const homeBtn = document.getElementById('home-btn');
     const bodyParts = [
         "Le cœur des courants marins palpite...",
         "Les poumons océaniques respirent...",
@@ -73,6 +73,10 @@ document.addEventListener('DOMContentLoaded', () => {
             triggerTrollPopup(randomTrollMessage);
             updatePoints(-Math.floor(points * 0.05));
         }
+    });
+
+    homeBtn.addEventListener('click', () => {
+        window.location.href = "../src/index.html";
     });
 
     upgradeButtons.forEach(button => {

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,7 +32,7 @@
             AquaPulse
         </h1>
         <p class="text-gray-600 max-w-2xl mx-auto">
-            Collaborative effort to create an interactive ocean-human body metaphor application
+            Un effort collaboratif pour créer une application interactive utilisant une métaphore entre l'océan et le corps humain.
         </p>
 
         <button id="theme-toggle" class="absolute top-4 right-4 bg-gray-200 rounded-full p-2 hover:bg-gray-300 transition-colors duration-300">
@@ -41,23 +41,23 @@
     </header>
 
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4" id="contributors-container">
-        <!-- Contributor cards will be dynamically added here -->
+        <!-- Les cartes des contributeurs seront ajoutées dynamiquement ici -->
     </div>
 
     <div class="mt-8 text-center">
         <div class="bg-white rounded-lg shadow-md p-6">
             <h2 class="text-2xl font-semibold text-blue-700 mb-4">
-                Project Context
+                Contexte du Projet
             </h2>
             <p class="text-gray-600">
-                This project was developed for the Nuit de l'Info 2024, focusing on creating
-                an educational application that explores the parallels between the human body
-                and the ocean ecosystem.
+                Ce projet a été développé pour la Nuit de l'Info 2024, en mettant l'accent sur la création
+                d'une application éducative explorant les parallèles entre le corps humain
+                et l'écosystème océanique.
             </p>
             <div class="flex justify-center items-center mt-4">
                 <i data-feather="wave" class="text-blue-500 mr-2"></i>
                 <span class="text-gray-700">
-                    Protecting Our Oceans, Understanding Our World
+                    Protéger nos océans, comprendre notre monde
                 </span>
             </div>
         </div>
@@ -65,7 +65,7 @@
 </div>
 
 <script>
-    // Contributors Data
+    // Données des contributeurs
     const contributors = [
         {
             name: "Rafael Duong",
@@ -73,7 +73,7 @@
             github: "RafLPB",
             avatar: "../ressources/img/pdp/rafael.png",
             contributions: [
-                "Organization",
+                "Organisation",
                 "Code index",
                 "QRCode",
                 "Vues"
@@ -81,71 +81,68 @@
         },
         {
             name: "Theo Maurin",
-            role: "coding",
+            role: "Développement",
             github: "theo287",
             avatar: "https://via.placeholder.com/100",
             contributions: [
                 "Captcha",
-                "Game of captcha",
-
+                "Jeu de captcha",
             ]
         },
         {
             name: "Lilian Martin",
-            role: "coding",
+            role: "Développement",
             github: "Lilianfh",
             avatar: "../ressources/img/pdp/lilian.png",
             contributions: [
-                "Credit dynamic(dark mode)",
-                "Credit",
-                "First page "
+                "Crédit dynamique (mode sombre)",
+                "Crédits",
+                "Page d'accueil"
             ]
         },
         {
             name: "Rayane Cathelin",
-            role: "Coding game",
+            role: "Développement jeu",
             github: "Rayane34",
             avatar: "../ressources/img/pdp/rayane.png",
             contributions: [
-                "Cookie clicking game"
+                "Jeu de clic sur cookie"
             ]
         },
         {
             name: "Esteban Monier",
-            role: "Coding/Ocean Research",
+            role: "Développement/Recherches océaniques",
             github: "Mzedou",
             avatar: "https://via.placeholder.com/100",
             contributions: [
-                "Ocean-Body Parallels",
-                "Credit",
-                "Climate Data Integration",
+                "Parallèles corps-océan",
+                "Crédits",
+                "Intégration des données climatiques",
                 "Podcast"
             ]
         },
         {
             name: "Hugo Fauss",
-            role: "Coding game",
+            role: "Développement jeu",
             github: "Hugo30400",
             avatar: "../ressources/img/pdp/hugo.png",
             contributions: [
-                "Logo Design",
-                "Create logo game",
-
+                "Design du logo",
+                "Création du logo pour le jeu",
             ]
         },
         {
             name: "Maxime Faux",
-            role: "Design ",
+            role: "Design",
             github: "maximefaux",
             avatar: "../ressources/img/pdp/maxime.png",
             contributions: [
                 "Design",
-
             ]
         }
     ];
 
-    // Render Contributors
+    // Afficher les contributeurs
     const contributorsContainer = document.getElementById('contributors-container');
     contributors.forEach(contributor => {
         const contributorCard = document.createElement('div');
@@ -155,7 +152,7 @@
             <div class="flex items-center">
                 <img
                     src="${contributor.avatar}"
-                    alt="${contributor.name}'s avatar"
+                    alt="Avatar de ${contributor.name}"
                     class="w-16 h-16 rounded-full mr-4"
                 />
                 <div>
@@ -174,7 +171,7 @@
                 </div>
             </div>
             <div class="contributions-details hidden mt-4 border-t pt-2">
-                <h4 class="font-semibold text-gray-700">Key Contributions:</h4>
+                <h4 class="font-semibold text-gray-700">Contributions principales :</h4>
                 <ul class="list-disc list-inside text-gray-600">
                     ${contributor.contributions.map(contrib => `<li>${contrib}</li>`).join('')}
                 </ul>
@@ -190,7 +187,7 @@
         contributorsContainer.appendChild(contributorCard);
     });
 
-    // Dark Mode Toggle
+    // Basculer le mode sombre
     const themeToggle = document.getElementById('theme-toggle');
     const themeIcon = document.getElementById('theme-icon');
     const body = document.body;
@@ -206,4 +203,3 @@
 </script>
 </body>
 </html>
-
