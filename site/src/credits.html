@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Race for Water Project Contributors</title>
+    <title>AquaPulse</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     <style>
@@ -25,13 +25,14 @@
     </style>
 </head>
 <body class="min-h-screen bg-blue-50 transition-colors duration-300 p-4 md:p-8">
+<a href="index.html"> <- Retour </a>
 <div class="container mx-auto max-w-4xl">
     <header class="text-center mb-8 relative">
         <h1 class="text-4xl font-bold text-blue-800 mb-4">
-            Race for Water Project Contributors
+            AquaPulse
         </h1>
         <p class="text-gray-600 max-w-2xl mx-auto">
-            Collaborative effort to create an interactive ocean-human body metaphor application
+            Un effort collaboratif pour créer une application interactive utilisant une métaphore entre l'océan et le corps humain.
         </p>
 
         <button id="theme-toggle" class="absolute top-4 right-4 bg-gray-200 rounded-full p-2 hover:bg-gray-300 transition-colors duration-300">
@@ -40,104 +41,143 @@
     </header>
 
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4" id="contributors-container">
-        <!-- Contributor cards will be dynamically added here -->
+        <!-- Les cartes des contributeurs seront ajoutées dynamiquement ici -->
     </div>
 
     <div class="mt-8 text-center">
         <div class="bg-white rounded-lg shadow-md p-6">
             <h2 class="text-2xl font-semibold text-blue-700 mb-4">
-                Project Context
+                Contexte du Projet
             </h2>
             <p class="text-gray-600">
-                This project was developed for the Nuit de l'Info 2024, focusing on creating
-                an educational application that explores the parallels between the human body
-                and the ocean ecosystem.
+                Ce projet a été développé pour la Nuit de l'Info 2024, en mettant l'accent sur la création
+                d'une application éducative explorant les parallèles entre le corps humain
+                et l'écosystème océanique.
             </p>
             <div class="flex justify-center items-center mt-4">
                 <i data-feather="wave" class="text-blue-500 mr-2"></i>
                 <span class="text-gray-700">
-                        Protecting Our Oceans, Understanding Our World
-                    </span>
+                    Protéger nos océans, comprendre notre monde
+                </span>
             </div>
         </div>
     </div>
 </div>
 
 <script>
-    // Contributors Data
+    // Données des contributeurs
     const contributors = [
         {
-            name: "Alice Dupont",
-            role: "Lead Developer",
-            github: "alice-dupont",
-            avatar: "https://via.placeholder.com/100",
+            name: "Rafael Duong",
+            role: "Leader code",
+            github: "RafLPB",
+            avatar: "../ressources/img/pdp/rafael.png",
             contributions: [
-                "Interactive Ocean Anatomy Mapping",
-                "Frontend Architecture",
-                "Podcast Integration"
+                "Organisation",
+                "Code index",
+                "QRCode",
+                "Vues"
             ]
         },
         {
-            name: "Bob Martin",
-            role: "UX Designer",
-            github: "bob-martin",
+            name: "Theo Maurin",
+            role: "Développement",
+            github: "theo287",
             avatar: "https://via.placeholder.com/100",
             contributions: [
-                "User Interface Design",
-                "Mobile Responsiveness",
-                "Interaction Flows"
+                "Captcha",
+                "Jeu de captcha",
             ]
         },
         {
-            name: "Claire Océane",
-            role: "Data Visualization Specialist",
-            github: "claire-oceane",
+            name: "Lilian Martin",
+            role: "Développement",
+            github: "Lilianfh",
+            avatar: "../ressources/img/pdp/lilian.png",
+            contributions: [
+                "Crédit dynamique (mode sombre)",
+                "Crédits",
+                "Page d'accueil"
+            ]
+        },
+        {
+            name: "Rayane Cathelin",
+            role: "Développement jeu",
+            github: "Rayane34",
+            avatar: "../ressources/img/pdp/rayane.png",
+            contributions: [
+                "Jeu de clic sur cookie"
+            ]
+        },
+        {
+            name: "Esteban Monier",
+            role: "Développement/Recherches océaniques",
+            github: "Mzedou",
             avatar: "https://via.placeholder.com/100",
             contributions: [
-                "Ocean-Body Parallels Visualization",
-                "Interactive Infographics",
-                "Climate Data Integration"
+                "Parallèles corps-océan",
+                "Crédits",
+                "Intégration des données climatiques",
+                "Podcast"
+            ]
+        },
+        {
+            name: "Hugo Fauss",
+            role: "Développement jeu",
+            github: "Hugo30400",
+            avatar: "../ressources/img/pdp/hugo.png",
+            contributions: [
+                "Design du logo",
+                "Création du logo pour le jeu",
+            ]
+        },
+        {
+            name: "Maxime Faux",
+            role: "Design",
+            github: "maximefaux",
+            avatar: "../ressources/img/pdp/maxime.png",
+            contributions: [
+                "Design",
             ]
         }
     ];
 
-    // Render Contributors
+    // Afficher les contributeurs
     const contributorsContainer = document.getElementById('contributors-container');
     contributors.forEach(contributor => {
         const contributorCard = document.createElement('div');
         contributorCard.className = 'bg-white rounded-lg shadow-md p-4 m-2 contributor-card cursor-pointer';
 
         contributorCard.innerHTML = `
-                <div class="flex items-center">
-                    <img
-                        src="${contributor.avatar}"
-                        alt="${contributor.name}'s avatar"
-                        class="w-16 h-16 rounded-full mr-4"
-                    />
-                    <div>
-                        <h3 class="text-xl font-bold text-blue-600">
-                            ${contributor.name}
-                        </h3>
-                        <p class="text-gray-600">${contributor.role}</p>
-                        <a
-                            href="https://github.com/${contributor.github}"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="flex items-center text-gray-500 hover:text-blue-600"
-                        >
-                            <i data-feather="github" class="mr-2" width="16" height="16"></i> ${contributor.github}
-                        </a>
-                    </div>
+            <div class="flex items-center">
+                <img
+                    src="${contributor.avatar}"
+                    alt="Avatar de ${contributor.name}"
+                    class="w-16 h-16 rounded-full mr-4"
+                />
+                <div>
+                    <h3 class="text-xl font-bold text-blue-600">
+                        ${contributor.name}
+                    </h3>
+                    <p class="text-gray-600">${contributor.role}</p>
+                    <a
+                        href="https://github.com/${contributor.github}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="inline-flex items-center text-gray-500 hover:text-blue-600"
+                    >
+                        <i data-feather="github" class="mr-2" width="16" height="16"></i> ${contributor.github}
+                    </a>
                 </div>
-                <div class="contributions-details hidden mt-4 border-t pt-2">
-                    <h4 class="font-semibold text-gray-700">Key Contributions:</h4>
-                    <ul class="list-disc list-inside text-gray-600">
-                        ${contributor.contributions.map(contrib => `<li>${contrib}</li>`).join('')}
-                    </ul>
-                </div>
-            `;
+            </div>
+            <div class="contributions-details hidden mt-4 border-t pt-2">
+                <h4 class="font-semibold text-gray-700">Contributions principales :</h4>
+                <ul class="list-disc list-inside text-gray-600">
+                    ${contributor.contributions.map(contrib => `<li>${contrib}</li>`).join('')}
+                </ul>
+            </div>
+        `;
 
-        // Toggle contributions on click
         contributorCard.addEventListener('click', () => {
             const contributionsDetails = contributorCard.querySelector('.contributions-details');
             contributionsDetails.classList.toggle('hidden');
@@ -147,7 +187,7 @@
         contributorsContainer.appendChild(contributorCard);
     });
 
-    // Dark Mode Toggle
+    // Basculer le mode sombre
     const themeToggle = document.getElementById('theme-toggle');
     const themeIcon = document.getElementById('theme-icon');
     const body = document.body;
@@ -155,17 +195,10 @@
     themeToggle.addEventListener('click', () => {
         body.classList.toggle('dark-mode');
 
-        if (body.classList.contains('dark-mode')) {
-            themeIcon.setAttribute('data-feather', 'sun');
-        } else {
-            themeIcon.setAttribute('data-feather', 'moon');
-        }
-
-        // Reinitialize Feather icons
+        themeIcon.setAttribute('data-feather', body.classList.contains('dark-mode') ? 'sun' : 'moon');
         feather.replace();
     });
 
-    // Initialize Feather icons
     feather.replace();
 </script>
 </body>
