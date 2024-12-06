@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let autoClickerActive = false;
     let autoClickerCount = 0;
     const maxAutoClickers = 1;
+    const maxDoubleUpgrades = 5;
 
     const pointsDisplay = document.getElementById('points-display');
     const oceanPulseBtn = document.getElementById('ocean-pulse-btn');
@@ -34,6 +35,17 @@ document.addEventListener('DOMContentLoaded', () => {
     function updatePoints(amount) {
         points = Math.max(0, points + amount);
         pointsDisplay.textContent = `Points Santé Océanique : ${points}`;
+        if (points >= 1000) {
+            alert("Félicitations ! Vous êtes arrivé à 1000 points, mais la planète a encore besoin de vous... Le jeu recommence !");
+            resetGame();
+        }
+    }
+
+    function resetGame() {
+        points = 0;
+        autoClickerCount = 0;
+        doubleUpgradeCount = 0;
+        updatePoints(0);
     }
 
     function showRandomMessage() {
@@ -57,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (Math.random() < 0.1) {
             const randomTrollMessage = trollMessages[Math.floor(Math.random() * trollMessages.length)];
             triggerTrollPopup(randomTrollMessage);
-            updatePoints(-Math.floor(points * 0.2));
+            updatePoints(-Math.floor(points * 0.05));
         }
     });
 
@@ -67,12 +79,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (points >= cost) {
                 switch (button.id) {
-                    case 'upgrade1':
-                        updatePoints(-cost);
-                        points *= 2;
-                        triggerTrollPopup("Doublement océanique !");
+                    case 'upgrade1': // Doublez vos points
+                        if (doubleUpgradeCount < maxDoubleUpgrades) {
+                            updatePoints(-cost);
+                            points *= 2;
+                            doubleUpgradeCount++;
+                            triggerTrollPopup("Doublement océanique !");
+                        } else {
+                            updatePoints(-cost);
+                            triggerTrollPopup("Vous vous êtes fait doubler !");
+                        }
                         break;
-
                     case 'upgrade2':
                         if (autoClickerCount < maxAutoClickers) {
                             updatePoints(-cost);
@@ -111,8 +128,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         updatePoints(-cost);
                         // Boost clicking power temporarily
                         let originalClickPower = 1;
-                        let boostDuration = 20000; // 20 seconds
-                        triggerTrollPopup("Courant vital activé !");
+                        let boostDuration = 60000; // 60 seconds
+                        triggerTrollPopup("Courant vital activé ! La minute de Folie !");
 
                         // Temporarly increase click power
                         oceanPulseBtn.addEventListener('click', boostClick);
